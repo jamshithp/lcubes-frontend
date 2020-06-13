@@ -118,7 +118,8 @@ function QuestionForm(){
         <Modal.Body>
         
         <Form className="justify-content-md-center form-inline">
-            <Form.Control as="select" onChange={(e) =>{ choosedCateg(e.target.value);setModalShow(false);}} defaultValue="psc">
+            <Form.Control as="select" onChange={(e) =>{ choosedCateg(e.target.value);setModalShow(false);}}>
+            <option>Select..</option>
             <option value="psc">PSC</option>
             <option value="jam">JAM</option>
             <option value="net">NET</option>
