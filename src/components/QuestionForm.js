@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal"
 
 function QuestionForm(){
     let requiredVal, jamPart = false;
-    const [category, changeCateg] = useState("PSC");
+    const [category, choosedCateg] = useState(null);
     //let chkError="d-none";
     if(category === "jam"){
         requiredVal = true;
@@ -53,7 +53,6 @@ function QuestionForm(){
                 if(chkexisted === 1){
                 const index = multipleChoose.findIndex(element => {return element === e.target.name})  
                 multipleChoose.splice(index, 1);
-                console.log(multipleChoose)
                 multipleChoosed(multipleChoose)
                 }
             }
@@ -65,41 +64,42 @@ function QuestionForm(){
     };
 
     const handleSubmit = (event) => {
-        console.log(multipleChoose)
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.preventDefault();
             event.stopPropagation();
         }
         if(!form.elements.correct1.checked && !form.elements.correct2.checked && !form.elements.correct3.checked && !form.elements.correct4.checked){
-            console.log(chkError);
             event.preventDefault();
             event.stopPropagation(); 
-            updateChkError("d-inline-block");
-            console.log(chkError);
-            console.log(multipleChoose.length);
+            updateChkError("d-block");
+
             showChkError("Choose an answer");
         }
-        if(category == "psc" && multipleChoose.length > 1){/**psc answer validation */
+        if(category === "psc" && multipleChoose.length > 1){/**psc answer validation */
             event.preventDefault();
             event.stopPropagation(); 
-            updateChkError("d-inline-block");
+            updateChkError("d-block");
             showChkError("Multiple answers not allowed");
         }
-        if(category === "jam" && jamPart === "PART-A" && multipleChoose.length > 1){/**jam part A answer validation */
+        console.log(category)
+        if(category === "jam" && formData.part === "PART-A" && multipleChoose.length > 1){/**jam part A answer validation */
             event.preventDefault();
             event.stopPropagation(); 
-            updateChkError("d-inline-block");
+            updateChkError("d-block");
             showChkError("Multiple answers not allowed");
         }
-        console.log(formData)
+        //console.log(formData)
         setValidated(true);
         event.preventDefault()
     }
-    const examChooserHandle = (e) =>{
-        changeCateg(e.target.value);
-        setModalShow(false);
-      }
+    // const examChooserHandle = (e) =>{
+    //     const val = e.target.value;
+    //     choosedCateg(val);
+    //     console.log(val)
+    //     console.log(category)
+    //     setModalShow(false);
+    //   }
 
     return(<>
         <Modal show={modalShow}
@@ -118,10 +118,9 @@ function QuestionForm(){
         <Modal.Body>
         
         <Form className="justify-content-md-center form-inline">
-            <Form.Control as="select" onChange={examChooserHandle}>
-            <option>Select</option>
-            <option value="jam">JAM</option>
+            <Form.Control as="select" onChange={(e) =>{ choosedCateg(e.target.value);setModalShow(false);}} defaultValue="psc">
             <option value="psc">PSC</option>
+            <option value="jam">JAM</option>
             <option value="net">NET</option>
             </Form.Control>
         </Form>
@@ -131,8 +130,7 @@ function QuestionForm(){
         <Form onSubmit={handleSubmit} noValidate validated={validated} className="examsQuestions">
             <Form.Group controlId="formGridState">
             <Form.Label className="pr-3" style={{display:jamPart?"block":"none"}}>Choose PART</Form.Label>
-            <Form.Control as="select" name="part" onChange={handleChange} style={{display:jamPart?"block":"none"}}>
-            <option>Select</option>
+            <Form.Control as="select" name="part" required={{jamPart}} onChange={handleChange} style={{display:jamPart?"block":"none"}} defaultValue="PART-A">
             <option value="PART-A">PART-A</option>
             <option value="PART-B">PART-B</option>
             <option value="PART-C">PART-C</option>
