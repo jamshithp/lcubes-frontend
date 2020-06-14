@@ -26,7 +26,7 @@ function Login(props) {
 
     event.preventDefault();
     event.stopPropagation();
-    props.loginMethod(data);
+    props.auth(data);
   }
   return (
     <div className="login text-center" >
@@ -59,11 +59,4 @@ function Login(props) {
 
   )
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return{
-    loginMethod : (data) => dispatch(action.signIn(data))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(Login)
+export default Login
