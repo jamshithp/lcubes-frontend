@@ -3,6 +3,7 @@ import Login from '../components/login'
 import { connect } from 'react-redux'
 import {Redirect } from 'react-router-dom'
 import Alert from 'react-bootstrap/Row'
+import * as action from '../store/actions'
 
 class Authentication extends Component {
   componentDidMount(){
@@ -15,7 +16,7 @@ class Authentication extends Component {
     return (
       <div>
       {this.props.uid===0?"":<Redirect to="/home" />}
-        <Login />
+        <Login auth={this.props.loginMethod}/>
         {this.props.error?<Alert variant="danger"> login failed </Alert>:""}
       </div>
     )
@@ -29,4 +30,9 @@ const mapStateToProps = (state) =>{
     error:state.auth.loginError
   }
 }
-export default connect(mapStateToProps,null)(Authentication);
+const mapDispatchToProps = (dispatch) => {
+  return{
+    loginMethod : (data) => dispatch(action.signIn(data))
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Authentication);
