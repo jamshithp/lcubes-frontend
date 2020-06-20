@@ -35,7 +35,6 @@ function Login(props) {
             <Form.Control type="email" placeholder="Enter email"
             onChange={handleChange}
             name="email"
-            id="login"
             required/>
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
@@ -45,7 +44,6 @@ function Login(props) {
           <Form.Group controlId="formBasicPassword">
             <Form.Control type="password" placeholder="Password" onChange={handleChange}
             name="password"
-            id="password"
             required/>
             <Form.Control.Feedback type="invalid" >Enter password</Form.Control.Feedback>
           </Form.Group>

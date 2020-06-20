@@ -5,10 +5,12 @@ const initialState = {
   auth:{
     userid:0,
     loggedIn:0,
-    token:0,
-    loginError:''
+    token:0
   },
-  userData:{}
+  error:'',
+  userData:{},
+  userRegistration:'',
+  courseDetails:[]
 }
 
 const reducer = (state=initialState, action) => {
@@ -25,15 +27,12 @@ const reducer = (state=initialState, action) => {
       }
     }
   }
-  if(actionTypes.AUTH_FAIL === action.type){
+  if(actionTypes.API_FAIL === action.type){
     console.log("action.data")
     console.log(action.data)
     return{
       ...state,
-      auth:{
-        ...state.auth,
-        loginError:1
-      }
+      error:action.data
     }
   }
   if(actionTypes.LOGOUT === action.type){
@@ -44,6 +43,21 @@ const reducer = (state=initialState, action) => {
         userid:0,
         loggedIn:0
       }
+    }
+  }
+
+  if(actionTypes.USER_REG === action.type){
+    return{
+      ...state,
+      userRegistration:action.data
+    }
+  }
+  if(actionTypes.COURSE_DETAILS === action.type){
+    console.log("action.data")
+    console.log(action.data)
+    return{
+      ...state,
+       courseDetails:[...action.data]
     }
   }
   return state

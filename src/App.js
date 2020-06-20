@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import '../src/styles/App.css';
-import Registration from './components/registration'
+import Registration from './containers/registration'
 import Home from './containers/home'
 import Authentication from './containers/authentication'
 import Header from './components/partials/header'
@@ -18,7 +18,8 @@ function App(props) {
     <Switch>
       {props.uid!==0?<Route path="/home" ><Route path="/home" exact><Home /></Route></Route>:""}
       <Route path="/" exact><Authentication/></Route>
-      <Route path="/register" exact ><Registration status={props.uid}/></Route>
+      <Route path="/register/institute" exact ><Registration client="institute"/></Route>
+      <Route path="/register/student" exact ><Registration client="student"/></Route>
     </Switch>
       {props.uid!==0?<Footer status={props.uid}/>:""}
     </BrowserRouter>
