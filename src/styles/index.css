@@ -13,8 +13,11 @@ code {
 }
 .flex-inline{
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+}
+.custom-checkbox{
+  padding-right: 10px;
 }
 
 /* login */

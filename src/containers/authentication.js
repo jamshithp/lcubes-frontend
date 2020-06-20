@@ -27,7 +27,7 @@ const mapStateToProps = (state) =>{
   return{
     uid:state.auth.userid,
     login:state.auth.loggedIn,
-    error:state.auth.loginError
+    error:state.error
   }
 }
 const mapDispatchToProps = (dispatch) => {
