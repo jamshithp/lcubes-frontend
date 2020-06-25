@@ -1,34 +1,29 @@
-import React, {useState} from 'react';
-import '../src/styles/App.css';
-import Registration from './containers/registration'
-import Home from './containers/home'
-import Authentication from './containers/authentication'
-import Header from './components/partials/header'
-import Footer from './components/partials/footer'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React from 'react';
+import {BrowserRouter,Route} from "react-router-dom";
+import './App.css';
+import { Provider } from 'react-redux';
+import store  from './store';
 
+import Homepage from './components/basic/homepage/homepage';
+import Dashboard from './components/dashboard/backbone';
+import TraineeRegister from './components/trainee/register/traineeregister';
+import MainPortal from './components/trainee/examPortal/portal';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-function App(props) {
+function App() {
   return (
-    <BrowserRouter>
-      {props.uid!==0?<Header status={props.uid} role=""/>:""}
-    <Switch>
-      {props.uid!==0?<Route path="/home" ><Route path="/home" exact><Home /></Route></Route>:""}
-      <Route path="/" exact><Authentication/></Route>
-      <Route path="/register/institute" exact ><Registration client="institute"/></Route>
-      <Route path="/register/student" exact ><Registration client="student"/></Route>
-    </Switch>
-      {props.uid!==0?<Footer status={props.uid}/>:""}
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <nav>
+          <Route exact path="/" component={Homepage} />
+          <Route exact path="/home" component={Homepage} />
+          <Route exact path="/user" component={Dashboard}/>
+          <Route path="/user/:options" component={Dashboard}/>
+          <Route exact path="/trainee/register" component={TraineeRegister}/>
+          <Route exact path="/trainee/taketest" component={MainPortal}/>
+        </nav>
+      </BrowserRouter>
+    </Provider> 
   );
 }
-const mapStateToProps = (state) =>{
-  return{
-    uid:state.auth.userid,
-    login:state.auth.loggedIn
-  }
-}
-export default connect(mapStateToProps,null)(App);
+
+export default App;
