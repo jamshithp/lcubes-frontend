@@ -43,9 +43,32 @@ class AllInstituation extends Component {
           _id : id
       }
     }).then((response)=>{
-      if(response.data.success){
+      if(response.data.message = "Success"){
         Alert('success','Success',response.data.message);
-        this.props.ChangeTrainerTableData();
+        this.props.ChangeInstituationTableData();
+      }
+      else{
+        return Alert('warning','Warning!',response.data.message);
+      }
+    }).catch((error)=>{
+      return Alert('error','Error!','Server Error');
+    })
+  }
+
+  changeStatus = (status,id) => {
+    console.log("id",id,"status",status)
+    SecurePost({
+      url : `${apis.UPATE_INSTITUTION_STATUS}`,
+      data : {
+        institutionId : id,
+        status:{
+          id:status,
+        }
+      }
+    }).then((response)=>{
+      if(response.data.message === "Success"){
+        Alert('success','Success',response.data.message);
+        this.props.ChangeInstituationTableData();
       }
       else{
         return Alert('warning','Warning!',response.data.message);
@@ -143,16 +166,25 @@ class AllInstituation extends Component {
             title: 'Subscription',
             dataIndex: 'status',
             key: 'contact',
-            render: (status) => (<span>{status=== null?"Pending":status.name}</span>),
+            render: (status) => (
+              <span>
+                {status=== null?"Pending":status.name}
+              </span>
+            ),
             //...this.getColumnSearchProps('status.name'),
           },
         {
           title: 'Action',
           key: '_id',
           dataIndex: '_id',
-          render: (key) => (
+          render: (key,data) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" onClick={()=>this.openModal(key,'Save Changes')}/>
+              <Button
+                type={(data.status && data.status.name ==="Active") ? "danger":"primary"}
+                onClick={()=>this.changeStatus((data.status && data.status.name ==="Active") ? 3 : 2,data.id)}
+                >
+                  {(data.status && data.status.name ==="Active") ? 'DEACTIVATE' : 'ACTIVATE'}
+                </Button>
                 <Divider type="vertical" />
                 <Popconfirm
                   title="Are you sure？"

@@ -47,6 +47,7 @@ const apis={
     BASE : envoirnment==='development'?'http://3.22.24.45:8090/':'',
     LOGIN : "/api/v1/login/",
     GET_ALL_INSTITUATION :'/InstitutionService/getAllInstitutions',
+    UPATE_INSTITUTION_STATUS:'/InstitutionService/updateStatusOfInstitution',
     GETDETAILSUSER : "/api/v1/user/details",
     GET_ALL_TRAINER :'/api/v1/admin/trainer/details/all',
     GET_SINGLE_TRAINER_DETAILS : '/api/v1/admin/trainer/details',

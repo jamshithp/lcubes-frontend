@@ -9,6 +9,7 @@ export const ChangeInstituationTableData = ()=> dispatch =>{
         payload1 : true,
         payload2 : []
     })
+    console.log("get call")
     Get({
         url:  `${apis.GET_ALL_INSTITUATION}`
     }).then((response)=>{
