@@ -16,7 +16,7 @@ import Alert from '../common/alert';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import { Layout, Menu,Button, Icon, Tooltip } from 'antd';
-import main from './main.jpg';
+import main from './main.png';
 import AllInstituation from '../admin/allInstituations/allInstituation';
 
 
