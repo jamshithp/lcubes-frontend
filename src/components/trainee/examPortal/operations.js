@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Badge, Icon,Button,Row,Col  } from 'antd';
+import { FlagFilled } from '@ant-design/icons';
+import { Badge, Button, Row, Col } from 'antd';
 import './portal.css';
 import {switchQuestion} from '../../../actions/traineeAction';
 
@@ -50,18 +51,18 @@ class Operations extends Component {
 function mark(props){
     if(props.mark){
         if(props.ans){
-            return(
-                <Badge className="qb" count={<Icon type="flag"  theme="filled" style={{ color: '#f5222d' }} />}>
+            return (
+                <Badge className="qb" count={<FlagFilled style={{ color: '#f5222d' }} />}>
                     <Button onClick={()=>props.switchQuestion(props.no)} style={{background:'#0B6623',color:'#fff'}}>{props.no+1}</Button>
-                </Badge>  
-            )
+                </Badge>
+            );
         }
         else{
-            return(
-                <Badge className="qb" count={<Icon type="flag"  theme="filled" style={{ color: '#f5222d' }} />}>
+            return (
+                <Badge className="qb" count={<FlagFilled style={{ color: '#f5222d' }} />}>
                     <Button onClick={()=>props.switchQuestion(props.no)} style={{background:'#999999',color:'#fff'}}>{props.no+1}</Button>
-                </Badge>  
-            )
+                </Badge>
+            );
         }
         
     }

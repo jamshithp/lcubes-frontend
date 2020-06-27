@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Skeleton,Modal,Form,InputNumber,Transfer,Row,Col } from 'antd';
+import { InfoOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Button, Skeleton, Modal, InputNumber, Transfer, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { changeStep,changeMode,removeQuestionFromMainQueue,changeBasicNewTestDetails,fetchSubjectWiseQuestion,pushQuestionToQueue } from '../../../actions/testAction';
 import './newtest.css';
@@ -53,7 +56,7 @@ class GeneraterandomQuestionO extends Component {
     renderItem = item => {
         const customLabel = (
           <span className="custom-item">
-                <Button shape="circle" onClick={()=>{this.OpenModel(item._id)}} icon="info" style={{background:'linear-gradient(to right,rgb(80,190,189),rgb(0,153,153),rgb(0,153,203))',color:'greenblue'}} size="small" ></Button>
+                <Button shape="circle" onClick={()=>{this.OpenModel(item._id)}} icon={<InfoOutlined />} style={{background:'linear-gradient(to right,rgb(80,190,189),rgb(0,153,153),rgb(0,153,203))',color:'greenblue'}} size="small" ></Button>
                 {item.body}
           </span>
         )

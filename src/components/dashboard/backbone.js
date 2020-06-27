@@ -15,7 +15,9 @@ import { changeActiveRoute } from '../../actions/useraction';
 import Alert from '../common/alert';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
-import { Layout, Menu,Button, Icon, Tooltip } from 'antd';
+import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { LogoutOutlined } from '@ant-design/icons';
+import { Layout, Menu, Button, Tooltip } from 'antd';
 import main from './main.png';
 import AllInstituation from '../admin/allInstituations/allInstituation';
 
@@ -139,13 +141,13 @@ class Dashboard extends React.Component{
                         >
                         {
                             this.props.user.userOptions.map((d,i)=>{
-                                return(
+                                return (
                                     <Menu.Item key={i}>
-                                        <Icon type={d.icon} />
+                                        <LegacyIcon type={d.icon} />
                                         <span>{d.display}</span>
                                         <Link to={d.link}></Link>
                                     </Menu.Item>
-                                )
+                                );
                             })
                         }
                     </Menu>
@@ -153,7 +155,7 @@ class Dashboard extends React.Component{
                 <Layout>
                     <Header theme="dark" style={{ position:'fixed',width:'100vw',paddingLeft: '10px',zIndex:'1000' }}>
                     
-                        <Icon
+                        <LegacyIcon
                             className="trigger"
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.toggle}
@@ -163,7 +165,7 @@ class Dashboard extends React.Component{
                             <li>
                                 <Tooltip placement="bottom" title="Log Out">
                                     <Button type="primary" size="large" shape="circle" onClick={this.logOut} className="logout-button">
-                                        <Icon type="logout" />
+                                        <LogoutOutlined />
                                     </Button>
                                 </Tooltip>
                             </li>
@@ -188,7 +190,7 @@ class Dashboard extends React.Component{
                         </div>
                     </Content>
                 </Layout>
-            </Layout> 
+            </Layout>
         );
     }
    

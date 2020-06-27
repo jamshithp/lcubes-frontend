@@ -43,8 +43,8 @@ const envoirnment = process.env.NODE_ENV;
     MAX_MARKS_FETCH:'/api/v1/test/max/marks'
 }*/
 const apis={
-    BASE_LOCAL_URL:envoirnment==='development'?'http://localhost:3000':'',
-    BASE : envoirnment==='development'?'http://3.22.24.45:8090/':'',
+    BASE_LOCAL_URL:envoirnment==='development'?'http://localhost:3000':'http://3.22.24.45:8090/',
+    BASE : envoirnment==='development'?'http://3.22.24.45:8090/':'http://3.22.24.45:8090/',
     LOGIN : "/api/v1/login/",
     GET_ALL_INSTITUATION :'/InstitutionService/getAllInstitutions',
     UPATE_INSTITUTION_STATUS:'/InstitutionService/updateStatusOfInstitution',

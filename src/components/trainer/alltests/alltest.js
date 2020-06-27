@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Icon, Typography, Modal,Tag   } from 'antd';
+import { InfoCircleOutlined, SearchOutlined } from '@ant-design/icons';
+import { Table, Input, Button, Typography, Modal, Tag } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
 import { 
@@ -44,7 +45,7 @@ class AllTests extends Component {
             <Button
               type="primary"
               onClick={() => this.handleSearch(selectedKeys, confirm)}
-              icon="search"
+              icon={<SearchOutlined />}
               size="small"
               style={{ width: 90, marginRight: 8 }}
             >
@@ -56,7 +57,7 @@ class AllTests extends Component {
           </div>
         ),
         filterIcon: filtered => (
-          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
         onFilter: (value, record) =>
           record[dataIndex]
@@ -137,7 +138,7 @@ class AllTests extends Component {
           dataIndex: '_id',
           render: (key) => (
             <span>
-              <Button type="primary" shape="circle" icon="info-circle" onClick={()=>this.openModal(key)}/>
+              <Button type="primary" shape="circle" icon={<InfoCircleOutlined />} onClick={()=>this.openModal(key)}/>
             </span>
           ),
         },

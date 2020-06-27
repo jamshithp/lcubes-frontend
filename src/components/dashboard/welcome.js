@@ -1,5 +1,6 @@
 import React from 'react';
 import './welcome.css';
+import { DeleteOutlined, EditOutlined, InfoOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 
@@ -12,13 +13,13 @@ export default function welcome() {
         <h4>   List of Instiutation trainers.</h4>
         <ul>
           <li>Add New - Create new Instiutation account.</li>
-          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon="edit" /> Edit Instiutation details.</p><Button size = 'small' type="primary" shape="circle" icon="delete" /> Delete Instiutation account.</li>
+          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon={<EditOutlined />} /> Edit Instiutation details.</p><Button size = 'small' type="primary" shape="circle" icon={<DeleteOutlined />} /> Delete Instiutation account.</li>
         </ul>
         <h3>2. All Courses</h3>
         <h4>   List of existing courses.</h4>
         <ul>
           <li>Add New - Create new course </li>
-          <li>Action - <br/><Button size = 'small' type="primary" shape="circle" icon="edit" /> Edit course name.</li>
+          <li>Action - <br/><Button size = 'small' type="primary" shape="circle" icon={<EditOutlined />} /> Edit course name.</li>
         </ul>
         <br/>
         <h2><b>Instiutation Instructions</b></h2>
@@ -26,7 +27,7 @@ export default function welcome() {
         <h4>   List of existing trainers.</h4>
         <ul>
           <li>Add New - Create new trainer account.</li>
-          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon="edit" /> Edit trainer details.</p><Button size = 'small' type="primary" shape="circle" icon="delete" /> Delete trainer account.</li>
+          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon={<EditOutlined />} /> Edit trainer details.</p><Button size = 'small' type="primary" shape="circle" icon={<DeleteOutlined />} /> Delete trainer account.</li>
         </ul>
         <br/>
         <h2><b>Trainer Instructions</b></h2>
@@ -34,12 +35,12 @@ export default function welcome() {
         <h4>   List of existing questions.</h4>
         <ul>
           <li>Add New - Create new question.</li>
-          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon="info" />  Question details & body.</p><Button size = 'small' type="primary" shape="circle" icon="delete" /> Delete question.</li>
+          <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon={<InfoOutlined />} />  Question details & body.</p><Button size = 'small' type="primary" shape="circle" icon={<DeleteOutlined />} /> Delete question.</li>
         </ul>
         <h3>2. All Tests</h3>
         <h4>   List of existing tests</h4>
         <ul>
-          <li>Action - <Button size = 'small' type="primary" shape="circle" icon="info" /> <ul>
+          <li>Action - <Button size = 'small' type="primary" shape="circle" icon={<InfoOutlined />} /> <ul>
             <li>Test Details</li>
             <li>Test Questions</li>
             <li>Trainees - List of Registered Candidates</li>
