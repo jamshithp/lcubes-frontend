@@ -119,12 +119,14 @@ class Login extends React.Component{
                                 </Button>
                             </Form.Item>
                             <Divider>New Registration</Divider>
-                            <Button type="defalut" block value='institute' onClick={this.showModal}>
-                              Register as institute
-                            </Button>
-                            <Button type="defalut" value='student' block onClick={this.showModal2}>
-                              Register as Student
-                            </Button>
+                            <div className="button-container">
+                                <Button type="defalut" block value='institute' onClick={this.showModal}>
+                                Register as Institute
+                                </Button>
+                                <Button type="defalut" value='student' block onClick={this.showModal2}>
+                                Register as Student
+                                </Button>
+                            </div>
                             <Modal
                               visible={this.state.visible}
                               onCancel={this.handleCancel}

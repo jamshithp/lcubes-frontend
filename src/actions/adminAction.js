@@ -192,10 +192,10 @@ export const ChangeSubjectTableData = (d)=> dispatch =>{
        payload2 :[]
     })
     SecureGet({
-        url:  `${apis.GET_ALL_SUBJECTS}`
+        url:  `${apis.GET_ALL_COURSE}`
     }).then((response)=>{
         console.log(response);
-        if(response.data.success){
+        if(response.data.message = "Success"){
             dispatch({
                 type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
                 payload1 : false,

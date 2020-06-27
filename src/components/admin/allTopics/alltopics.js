@@ -92,10 +92,24 @@ class AllTopics extends Component {
       const columns = [
         {
           title: 'Name',
-          dataIndex: 'topic',
-          key: 'topic',
-          width: '70%',
-          ...this.getColumnSearchProps('topic'),
+          dataIndex: 'courseName',
+          key: 'courseName',
+          width: '25%',
+          ...this.getColumnSearchProps('courseName'),
+        },
+        {
+          title: 'Course Type',
+          dataIndex: 'courseType',
+          key: 'courseType',
+          width: '25%',
+          ...this.getColumnSearchProps('courseType'),
+        },
+        {
+          title: 'Course Description',
+          dataIndex: 'courseDescription',
+          key: 'courseDescription',
+          width: '25%',
+          ...this.getColumnSearchProps('courseDescription'),
         },
         {
           title: 'Action',
@@ -112,15 +126,15 @@ class AllTopics extends Component {
           <div className="admin-table-container">
             <Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic')}>
               Add New
-            </Button> 
+            </Button>
             <div className="register-trainer-form-header">
-              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Topics</Title>
+              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Courses</Title>
             </div>
-            <Table 
-              bordered={true} 
-              columns={columns} 
-              dataSource={this.props.admin.subjectTableData} 
-              size="medium" 
+            <Table
+              bordered={true}
+              columns={columns}
+              dataSource={this.props.admin.subjectTableData}
+              size="medium"
               pagination={{ pageSize: 5 }}
               loading={this.props.admin.SubjectTableLoading}
               rowKey="_id"

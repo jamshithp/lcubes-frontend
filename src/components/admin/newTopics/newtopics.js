@@ -21,13 +21,15 @@ class NewTopics extends Component {
             if (!err) {
                 console.log('Received values of form: ', values);
                 SecurePost({
-                    url : `${apis.CREATE_SUBJECT}`,
+                    url : `${apis.ADD_COURSE}`,
                     data : {
-                        _id : this.props.admin.SubjectId,
-                        topic : values.topic
+                        courseId : this.props.admin.SubjectId,
+                        courseName : values.courseName,
+                        courseType:values.courseType,
+                        courseDescription:values.courseDescription,
                     }
                 }).then((response)=>{
-                    if(response.data.success){
+                    if(response.data.message ==="Success"){
                         this.props.ChangeSubjectModalState(false,null,'New Topic');
                         Alert('success','Success',response.data.message);
                         this.props.ChangeSubjectTableData();
@@ -50,10 +52,22 @@ class NewTopics extends Component {
             <div className="register-subject-form" >
                 <div className="register-trainer-form-body">
                     <Form  onSubmit={this.handleSubmit}>
-                        <Form.Item label="Topic Name" hasFeedback className="input-admin-trainer">
-                            {getFieldDecorator('topic', {
-                                initialValue : this.props.admin.subjectDetails.topic,
-                                rules: [{ required: true, message: 'Please input topic name!', whitespace: true }],
+                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
+                            {getFieldDecorator('courseName', {
+                                initialValue : this.props.admin.subjectDetails.courseName,
+                                rules: [{ required: true, message: 'Please input course name!', whitespace: true }],
+                            })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Course Type" hasFeedback className="input-admin-trainer">
+                            {getFieldDecorator('courseType', {
+                                initialValue : this.props.admin.subjectDetails.courseType,
+                                rules: [{ required: true, message: 'Please input Course Type!', whitespace: true }],
+                            })(<Input />)}
+                        </Form.Item>
+                        <Form.Item label="Course Description" hasFeedback className="input-admin-trainer">
+                            {getFieldDecorator('courseDescription', {
+                                initialValue : this.props.admin.subjectDetails.courseDescription,
+                                rules: [{ required: true, message: 'Please input Course Description!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>
                         <Form.Item>
