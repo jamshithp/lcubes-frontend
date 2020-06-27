@@ -6,6 +6,8 @@ import trainerAction from './trainer';
 import testAction from './test';
 import conductTest from './conductTest';
 import trainee from './trainee';
+import registration from './registration';
+
 
 export default combineReducers({
     drawer : openDrawer,
@@ -14,5 +16,6 @@ export default combineReducers({
     trainer : trainerAction,
     test : testAction,
     conduct:conductTest,
-    trainee:trainee
+    trainee:trainee,
+    registration:registration
 })

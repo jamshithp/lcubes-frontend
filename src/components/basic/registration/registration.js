@@ -1,18 +1,33 @@
 import React, {useState} from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
-import StudentForm from './partials/registration/studentForm'
-import InstituteForm from './partials/registration/instituteForm'
+import { Form } from 'antd';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button } from 'antd';
+
+import InstituteForm from '../partials/registration/instituteForm'
+import StudentForm from '../partials/registration/studentForm'
 
 function Register(props) {
 
   const [validated, setValidated] = useState(false);
-
+  const [submit, setSubmit] = useState('disabled');
   const [data, setData] = useState({
     courseDetailsList: [],
+    address:{state:'Kerala',country:'India'},
     role: {role:props.client,roleId:props.roleId}
   })
 
+  const handlePassword = (event) =>{
+    if(event.target.value != data.password){
+      console.log('password not matching')
+      setValidated(true)
+      setSubmit('disabled')
+    }else if(event.target.value != data.password){
+
+    }else {
+      setValidated(false)
+      setSubmit('')
+    }
+  }
   const handleChange = (event) => {
     let {name, value} = event.target
     if(event.target.name == 'poneNumber'){
@@ -20,6 +35,7 @@ function Register(props) {
     }
     const values = {...data, [name]:value}
     setData(values)
+    console.log(data)
   }
 
   const handleInstituteCode =(event)=>{
@@ -43,43 +59,54 @@ function Register(props) {
   }
 
   const addressHandleChange = (event) => {
-    // const {name, value} = event.target
-    // const values = {...data, address:{
-    //   ...data.address,
-    //   [name]:value
-    // }}
-    // setData(values)
+    const {name, value} = event.target
+    const values = {...data, address:{
+      ...data.address,
+      [name]:value
+    }}
+    setData(values)
+    console.log(data)
   }
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+  const onFinish = values => {
+    if (validated == false) {
+      props.api(data)
+    }else{
+      console.log("validation failed")
     }
-    setValidated(true);
-    event.preventDefault();
-    event.stopPropagation();
-    props.api(data)
+  };
+
+  const onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
   };
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <div>
+    {props.client==="student"?<h2>
+      Regiter as Student
+    </h2>:<h2>
+      Regiter as Institute
+    </h2>}
         {props.client === 'institute'?
         <InstituteForm
         handleChange ={handleChange}
         addressHandleChange={addressHandleChange}
-        handleCourse={handleCourse}
         handleInstituteCode={handleInstituteCode}
+        handlePassword={handlePassword}
+        onSubmit={onFinish}
+        onFail={onFinishFailed}
+        validated={validated}
+        submit={submit}
         />:
         <StudentForm handleChange ={handleChange}
         addressHandleChange={addressHandleChange}
         handleCourse={handleCourse}
         handleInstituteCode={handleInstituteCode}
         courseData={props.courseData}
+        onSubmit={onFinish}
+        onFail={onFinishFailed}
         />}
-      <Button type="submit">Register</Button>
-    </Form>
+    </div>
   );
 }
 
