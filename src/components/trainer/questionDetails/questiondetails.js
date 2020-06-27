@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Skeleton,Row, Col, Icon, Tabs,Descriptions,Button    } from 'antd';
+import { HomeOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Skeleton, Row, Col, Tabs, Descriptions, Button } from 'antd';
 import './questiondetails.css';
 import apis from '../../../services/Apis';
 import { SecureGet } from '../../../services/axiosCall';
@@ -39,16 +40,16 @@ export default class QuestionDetails extends Component {
             <div>
                 <Skeleton loading={this.state.loading} active avatar>
                     <Tabs defaultActiveKey="1" onChange={ (e)=>this.tabChange(e)}>
-                        <TabPane tab={ <span><Icon type="home" />Basic Info</span> } key="1">
+                        <TabPane tab={ <span><HomeOutlined />Basic Info</span> } key="1">
                             <Tab1 id={this.props.id} details={this.state.details}/>
                         </TabPane>
-                        <TabPane tab={ <span><Icon type="question-circle" />Question</span> } key="2">
+                        <TabPane tab={ <span><QuestionCircleOutlined />Question</span> } key="2">
                             <Tab2 details={this.state.details} />
                         </TabPane>
                     </Tabs>    
                 </Skeleton>                
             </div>
-        )
+        );
     }
 }
 

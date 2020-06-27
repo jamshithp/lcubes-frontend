@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table, Icon , Tag,Skeleton, Descriptions,Modal, Button,Row,Col } from 'antd';
+import { CheckCircleTwoTone, CloseCircleTwoTone, InfoOutlined } from '@ant-design/icons';
+import { Table, Tag, Skeleton, Descriptions, Modal, Button, Row, Col } from 'antd';
 import './answer.css';
 import { connect } from 'react-redux';
 import { Post } from '../../../services/axiosCall';
@@ -102,7 +103,7 @@ class Answer extends React.Component{
                 title: 'View Question',
                 key: 'action',
                 render: (text, record) => (
-                    <Button shape="circle" icon="info" type="primary" size="small" onClick={()=>{this.OpenModel(text.qid)}}></Button>
+                    <Button shape="circle" icon={<InfoOutlined />} type="primary" size="small" onClick={()=>{this.OpenModel(text.qid)}}></Button>
                 )
             },
             {
@@ -161,9 +162,9 @@ class Answer extends React.Component{
                         {
                             tags?
                             
-                                <Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a" />
+                                <CheckCircleTwoTone twoToneColor="#52c41a" />
                             :
-                                <Icon type="close-circle" theme="twoTone" twoToneColor="red" />
+                                <CloseCircleTwoTone twoToneColor="red" />
                         }
                     </span>
                     

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Icon, Typography, Divider, Modal, Popconfirm } from 'antd';
+import { DeleteOutlined, SearchOutlined, UserAddOutlined } from '@ant-design/icons';
+import { Table, Input, Button, Typography, Divider, Modal, Popconfirm } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
 import { 
@@ -94,7 +95,7 @@ class AllInstituation extends Component {
             <Button
               type="primary"
               onClick={() => this.handleSearch(selectedKeys, confirm)}
-              icon="search"
+              icon={<SearchOutlined />}
               size="small"
               style={{ width: 90, marginRight: 8 }}
             >
@@ -106,7 +107,7 @@ class AllInstituation extends Component {
           </div>
         ),
         filterIcon: filtered => (
-          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
         onFilter: (value, record) =>
           record[dataIndex]
@@ -191,47 +192,47 @@ class AllInstituation extends Component {
                   cancelText="No"
                   okText="Yes"
                   onConfirm={()=>{this.deleteTrainer(key)}}
-                  icon={<Icon type="delete" style={{ color: 'red' }} />}
+                  icon={<DeleteOutlined style={{ color: 'red' }} />}
                 >
-                  <Button type="danger" shape="circle" icon="delete" />
+                  <Button type="danger" shape="circle" icon={<DeleteOutlined />} />
                 </Popconfirm>
             </span>
           ),
         },
       ];
         return (
-            <div className="admin-table-container">
-              <Button type="primary" icon="user-add" style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'Register')}>
-                Add New
-              </Button>
-              <div className="register-trainer-form-header">
-                <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Instituations</Title>
-              </div>
-              <Table
-                bordered={true}
-                columns={columns}
-                dataSource={this.props.admin.instituationTableData}
-                size="medium"
-                pagination={{ pageSize: 5 }}
-                loading={this.props.admin.instituationTableLoadingStatus}
-                rowKey="_id"
-              />;
-              <Modal
-                visible={this.props.admin.TrainermodalOpened}
-                title={false}
-                onOk={this.handleOk}
-                onCancel={this.closeModal}
-                style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
-                width="40%"
-                destroyOnClose={true}
-                footer={[
-                  
-                ]}
-              >
-                <NewTrainerForm />
-              </Modal>
+          <div className="admin-table-container">
+            <Button type="primary" icon={<UserAddOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'Register')}>
+              Add New
+            </Button>
+            <div className="register-trainer-form-header">
+              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Instituations</Title>
             </div>
-        )
+            <Table
+              bordered={true}
+              columns={columns}
+              dataSource={this.props.admin.instituationTableData}
+              size="medium"
+              pagination={{ pageSize: 5 }}
+              loading={this.props.admin.instituationTableLoadingStatus}
+              rowKey="_id"
+            />;
+            <Modal
+              visible={this.props.admin.TrainermodalOpened}
+              title={false}
+              onOk={this.handleOk}
+              onCancel={this.closeModal}
+              style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
+              width="40%"
+              destroyOnClose={true}
+              footer={[
+                
+              ]}
+            >
+              <NewTrainerForm />
+            </Modal>
+          </div>
+        );
     }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Input,Button, Typography,Tabs, Icon  } from 'antd';
+import { QuestionCircleOutlined, UserOutlined } from '@ant-design/icons';
+import { Input, Button, Typography, Tabs } from 'antd';
 import './conducttes.css';
 import { changeConducttestId, updateCandidatesTest,updateQuestiosnTest } from '../../../actions/conductTest';
 import TestDetails from './details';
@@ -76,15 +77,15 @@ class C extends Component {
                 <div>
                     <TestDetails/>
                     <Tabs defaultActiveKey="1" style={{marginTop:'20px'}}>
-                        <TabPane tab={<span><Icon type="user" />Registered Trainee</span>} key="1">
+                        <TabPane tab={<span><UserOutlined />Registered Trainee</span>} key="1">
                             <Candidates />
                         </TabPane>
-                        <TabPane tab={<span><Icon type="question-circle" />Questions</span>} key="2">
+                        <TabPane tab={<span><QuestionCircleOutlined />Questions</span>} key="2">
                             <Questions id={this.props.conduct.id} questionsOfTest={this.props.conduct.questionsOfTest} updateQuestiosnTest={this.props.updateQuestiosnTest}  />
                         </TabPane>
                     </Tabs>
                 </div>
-            )
+            );
         }
         
     }

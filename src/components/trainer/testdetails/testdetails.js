@@ -1,5 +1,15 @@
 import React, { Component } from 'react'
-import { Tabs, Icon, Descriptions,Skeleton, Tag, Input ,message} from 'antd';
+
+import {
+    CopyOutlined,
+    HomeOutlined,
+    MessageOutlined,
+    PieChartOutlined,
+    QuestionCircleOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
+
+import { Tabs, Descriptions, Skeleton, Tag, Input, message } from 'antd';
 import { connect } from 'react-redux';
 import './testdetails.css';
 import Questions from '../conducttest/questions'
@@ -107,10 +117,10 @@ class TestDetails extends Component {
             return (
                 <div>
                     <Tabs defaultActiveKey="1" onChange={ (e)=>this.tabChange(e)}>
-                        <TabPane tab={ <span><Icon type="home" />Details</span> } key="1">
+                        <TabPane tab={ <span><HomeOutlined />Details</span> } key="1">
                             <Descriptions bordered title="" border size="small" column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}>
                                 <Descriptions.Item label="Test Id">{this.props.trainer.DataActiveTestDetails.testDetailsId}</Descriptions.Item>
-                                <Descriptions.Item label="Test Link"><Input disabled={true} value={`${this.state.mainlink}user/conducttest?testid=${id}`} addonAfter={<CopyToClipboard text={`${this.state.mainlink}user/conducttest?testid=${id}`} onCopy={()=>message.success('Link Copied to clipboard')}><Icon type="copy"/></CopyToClipboard>}/></Descriptions.Item>
+                                <Descriptions.Item label="Test Link"><Input disabled={true} value={`${this.state.mainlink}user/conducttest?testid=${id}`} addonAfter={<CopyToClipboard text={`${this.state.mainlink}user/conducttest?testid=${id}`} onCopy={()=>message.success('Link Copied to clipboard')}><CopyOutlined /></CopyToClipboard>}/></Descriptions.Item>
                                 <Descriptions.Item label="Test Name">{testdetails.title}</Descriptions.Item>
                                 <Descriptions.Item label="Test Type">{testdetails.type}</Descriptions.Item>
                                 <Descriptions.Item label="Subject">
@@ -128,28 +138,28 @@ class TestDetails extends Component {
                             </Descriptions>
                         </TabPane>
                         {testdetails.testconducted?
-                            <TabPane tab={ <span><Icon type="question-circle" />Questions</span> } key="2">
+                            <TabPane tab={ <span><QuestionCircleOutlined />Questions</span> } key="2">
                                 <Questions id={this.props.trainer.DataActiveTestDetails.testDetailsId} questionsOfTest={this.props.trainer.DataActiveTestDetails.testquestions} updateQuestiosnTest={this.props.updateQuestiosnActiveTest}/>
                             </TabPane>
                         :null}
                         {testdetails.testconducted?
-                            <TabPane tab={ <span><Icon type="user" />Trainees</span> } key="3">
+                            <TabPane tab={ <span><UserOutlined />Trainees</span> } key="3">
                                 <Trainee maxmMarks={this.state.maxMarks} id={this.state.id} stats={this.state.stats}/>
                             </TabPane>
                         :null}
                         {testdetails.testconducted?
-                            <TabPane tab={ <span><Icon type="pie-chart" />Statistics</span> } key="4">
+                            <TabPane tab={ <span><PieChartOutlined />Statistics</span> } key="4">
                                 <Stats id={this.state.id} stats={this.state.stats} file={this.state.file} maxmMarks={this.state.maxMarks}/>
                             </TabPane>
                         :null}
                         {testdetails.testconducted?
-                            <TabPane tab={ <span><Icon type="message" />Feedbacks</span> } key="5">
+                            <TabPane tab={ <span><MessageOutlined />Feedbacks</span> } key="5">
                                <FeedBacks feedbacks={this.state.feedbacks}/>
                             </TabPane>
                         :null}
                     </Tabs>
                 </div>
-            )
+            );
         }
     }
 }
