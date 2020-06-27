@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Icon, Typography,  Modal } from 'antd';
+import { EditOutlined, FileTextOutlined, SearchOutlined } from '@ant-design/icons';
+import { Table, Input, Button, Typography, Modal } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
 import { 
@@ -42,7 +43,7 @@ class AllTopics extends Component {
             <Button
               type="primary"
               onClick={() => this.handleSearch(selectedKeys, confirm)}
-              icon="search"
+              icon={<SearchOutlined />}
               size="small"
               style={{ width: 90, marginRight: 8 }}
             >
@@ -54,7 +55,7 @@ class AllTopics extends Component {
           </div>
         ),
         filterIcon: filtered => (
-          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
         onFilter: (value, record) =>
           record[dataIndex]
@@ -102,43 +103,43 @@ class AllTopics extends Component {
           dataIndex: '_id',
           render: (key) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" onClick={()=>this.openModal(key,'Save Changes')}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes')}/>
             </span>
           ),
         },
       ];
         return (
-            <div className="admin-table-container">
-              <Button type="primary" icon="file-text" style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic')}>
-                Add New
-              </Button> 
-              <div className="register-trainer-form-header">
-                <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Topics</Title>
-              </div>
-              <Table 
-                bordered={true} 
-                columns={columns} 
-                dataSource={this.props.admin.subjectTableData} 
-                size="medium" 
-                pagination={{ pageSize: 5 }}
-                loading={this.props.admin.SubjectTableLoading}
-                rowKey="_id"
-              />;
-              <Modal
-                visible={this.props.admin.SubjectmodalOpened}
-                title={false}
-                onOk={this.handleOk}
-                onCancel={this.closeModal}
-                style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
-                destroyOnClose={true}
-                footer={[
-                  
-                ]}
-              >
-                <NewSubjectForm />
-              </Modal>
+          <div className="admin-table-container">
+            <Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic')}>
+              Add New
+            </Button> 
+            <div className="register-trainer-form-header">
+              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Topics</Title>
             </div>
-        )
+            <Table 
+              bordered={true} 
+              columns={columns} 
+              dataSource={this.props.admin.subjectTableData} 
+              size="medium" 
+              pagination={{ pageSize: 5 }}
+              loading={this.props.admin.SubjectTableLoading}
+              rowKey="_id"
+            />;
+            <Modal
+              visible={this.props.admin.SubjectmodalOpened}
+              title={false}
+              onOk={this.handleOk}
+              onCancel={this.closeModal}
+              style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
+              destroyOnClose={true}
+              footer={[
+                
+              ]}
+            >
+              <NewSubjectForm />
+            </Modal>
+          </div>
+        );
     }
 }
 

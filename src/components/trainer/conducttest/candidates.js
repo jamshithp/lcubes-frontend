@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import apis from '../../../services/Apis';
 import { SecurePost } from '../../../services/axiosCall';
 import Alert from '../../common/alert';
-import { Table,Input,Button,Icon,message,Typography } from 'antd';
+import { CopyOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
+import { Table, Input, Button, message, Typography } from 'antd';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Highlighter from 'react-highlight-words';
 import './conducttes.css';
@@ -39,7 +40,7 @@ class Candidates extends Component {
             <Button
               type="primary"
               onClick={() => this.handleSearch(selectedKeys, confirm)}
-              icon="search"
+              icon={<SearchOutlined />}
               size="small"
               style={{ width: 90, marginRight: 8 }}
             >
@@ -51,7 +52,7 @@ class Candidates extends Component {
           </div>
         ),
         filterIcon: filtered => (
-          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
         onFilter: (value, record) =>
           record[dataIndex]
@@ -152,14 +153,14 @@ class Candidates extends Component {
                 key: '_id',
                 dataIndex: '_id',
                 render: id => (
-                  <Input disabled={true} value={`${this.state.mainlink}trainee/taketest?testid=${this.props.conduct.id}&traineeid=${id}`} addonAfter={<CopyToClipboard text={`${this.state.mainlink}trainee/taketest?testid=${this.props.conduct.id}&traineeid=${id}`} onCopy={()=>message.success('Link Copied to clipboard')}><Icon type="copy"/></CopyToClipboard>}/>
+                  <Input disabled={true} value={`${this.state.mainlink}trainee/taketest?testid=${this.props.conduct.id}&traineeid=${id}`} addonAfter={<CopyToClipboard text={`${this.state.mainlink}trainee/taketest?testid=${this.props.conduct.id}&traineeid=${id}`} onCopy={()=>message.success('Link Copied to clipboard')}><CopyOutlined /></CopyToClipboard>}/>
                 ),
             }
         ];
 
         return (
             <div className="candidate-list-header-container"> 
-                <Button className="reload-button" type="primary" icon="reload" loading={this.state.loading} onClick={this.refreshUserList}>Reload!</Button>
+                <Button className="reload-button" type="primary" icon={<ReloadOutlined />} loading={this.state.loading} onClick={this.refreshUserList}>Reload!</Button>
                 <div className="register-trainer-form-header">
                     <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Registered Candidates</Title>
                 </div> 
@@ -171,7 +172,7 @@ class Candidates extends Component {
                 loading={this.state.loading}
                 />
             </div>
-        )
+        );
     }
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux';
+import { CaretRightOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import {ProceedtoTest,fetchTestdata} from '../../../actions/traineeAction';
 import './portal.css';
@@ -18,7 +19,7 @@ function Instruction(props) {
                     <h4>6. The test will be automatically submitted when the clock reads 0:0.</h4>
                 <h4><b>NOTE :</b>To save answers,click on the 'Save & Next' button.</h4>
                     <div className="proceed-to-test-button">
-                        <Button style={{float:'right'}} type="primary" icon="caret-right" onClick={()=>{props.ProceedtoTest(props.trainee.testid,props.trainee.traineeid,()=>{props.fetchTestdata(props.trainee.testid,props.trainee.traineeid)})}}  loading={props.trainee.proceedingToTest}>
+                        <Button style={{float:'right'}} type="primary" icon={<CaretRightOutlined />} onClick={()=>{props.ProceedtoTest(props.trainee.testid,props.trainee.traineeid,()=>{props.fetchTestdata(props.trainee.testid,props.trainee.traineeid)})}}  loading={props.trainee.proceedingToTest}>
                             Proceed To Test
                         </Button>
                     </div>
@@ -28,7 +29,7 @@ function Instruction(props) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 const mapStateToProps = state => ({

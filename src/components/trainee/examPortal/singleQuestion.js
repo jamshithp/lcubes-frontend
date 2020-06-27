@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Alert from '../../common/alert';
 import apis from '../../../services/Apis';
 import { Post } from '../../../services/axiosCall';
-import { Icon,Button,Row,Col,Radio,Checkbox  } from 'antd';
+import { FlagOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { Button, Row, Col, Radio, Checkbox } from 'antd';
 import { switchQuestion,updateIsMarked, fetchTestdata } from '../../../actions/traineeAction';
 import './portal.css';
 
@@ -224,12 +225,12 @@ class SingleQuestion extends React.Component{
                             null
                             :
                             <Button style={{background:'#009999',color:'#fff'}} onClick={this.previous}>
-                                <Icon type="left" />
+                                <LeftOutlined />
                                 Previous
                             </Button>
                         }
                         <Button type="default" onClick={this.mark}>
-                                <Icon type="flag" />
+                                <FlagOutlined />
                                 {!this.props.trainee.answers[this.props.trainee.activeQuestionIndex].isMarked?"Mark Question":"Unmark Question"}
                         </Button>
                         {this.props.trainee.activeQuestionIndex===this.props.trainee.questions.length-1?
@@ -237,19 +238,19 @@ class SingleQuestion extends React.Component{
                             :
                             <Button style={{background:'#009999',color:'#fff'}} onClick={this.next}>
                                 {this.state.AnswerSelected?"Save & Next": "Next"}
-                                <Icon type="right" />
+                                <RightOutlined />
                             </Button>
                         }
                         {this.props.trainee.activeQuestionIndex===this.props.trainee.questions.length-1 && this.state.AnswerSelected?
                             <Button style={{background:'#009999',color:'#fff'}} onClick={()=>{this.SaveTocloud()}}>
                                 Save
-                                <Icon type="right" />
+                                <RightOutlined />
                             </Button>:null
                         }
                     </Button.Group>
                 </div>
             </div>
-        )
+        );
     }   
 }
 

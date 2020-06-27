@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
 import './newquestion.css';
-import {
-    Form,
-    Input,
-    Button,
-    Select,
-    Row,
-    Col,
-    Checkbox,
-    Modal,
-    Upload,
-    Icon,
-    InputNumber 
-} from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button, Select, Row, Col, Checkbox, Modal, Upload, InputNumber } from 'antd';
 import { connect } from 'react-redux';
 import { 
     ChangeQuestionConfirmDirty,
@@ -351,7 +342,7 @@ class NewQuestion extends Component {
                                     <Form.Item label="Question Image">
                                         <Upload {...QuestionImageprops} beforeUpload={this.upl} onRemove={this.changeqImage} onSuccess={this.changeqImage}>
                                             <Button>
-                                                <Icon type="upload" /> Upload
+                                                <UploadOutlined /> Upload
                                             </Button>
                                         </Upload>
                                     </Form.Item>
@@ -380,7 +371,7 @@ class NewQuestion extends Component {
                             <div style={{paddingTop:'20px'}}>
                                 {
                                     this.state.questionDetails.options.map((option,i)=>{
-                                        return(
+                                        return (
                                             <Row key={i} className="">
                                                 <Col offset={1} span={13}>
                                                     <Form.Item label={`option${i+1}`}>
@@ -391,7 +382,7 @@ class NewQuestion extends Component {
                                                     <Form.Item label={`Option${i+1} Image`}>
                                                         <Upload {...QuestionImageprops} beforeUpload={this.upl} onRemove={(f)=>this.OptionImageonChange(null,i)} onSuccess={(f)=>this.OptionImageonChange(f,i)}>
                                                             <Button>
-                                                                <Icon type="upload" /> Upload
+                                                                <UploadOutlined /> Upload
                                                             </Button>
                                                         </Upload>
                                                     </Form.Item>
@@ -401,8 +392,8 @@ class NewQuestion extends Component {
                                                         <Checkbox checked={this.state.questionDetails.options[i].isAnswer} onChange={(e)=>this.AnswerOptionSwitch(e,i)} ></Checkbox>
                                                     </Form.Item>
                                                 </Col>
-                                            </Row>                                                
-                                        )
+                                            </Row>
+                                        );
                                     })
                                 }
                             </div>
@@ -425,7 +416,7 @@ class NewQuestion extends Component {
                     </Form>
                 </div>
             </div>
-        )
+        );
     }
 }
 

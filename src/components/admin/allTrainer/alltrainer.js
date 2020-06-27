@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Table, Input, Button, Icon, Typography, Divider, Modal, Popconfirm } from 'antd';
+import { DeleteOutlined, EditOutlined, SearchOutlined, UserAddOutlined } from '@ant-design/icons';
+import { Table, Input, Button, Typography, Divider, Modal, Popconfirm } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
 import { 
@@ -71,7 +72,7 @@ class AllTrainer extends Component {
             <Button
               type="primary"
               onClick={() => this.handleSearch(selectedKeys, confirm)}
-              icon="search"
+              icon={<SearchOutlined />}
               size="small"
               style={{ width: 90, marginRight: 8 }}
             >
@@ -83,7 +84,7 @@ class AllTrainer extends Component {
           </div>
         ),
         filterIcon: filtered => (
-          <Icon type="search" style={{ color: filtered ? '#1890ff' : undefined }} />
+          <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
         ),
         onFilter: (value, record) =>
           record[dataIndex]
@@ -144,16 +145,16 @@ class AllTrainer extends Component {
           dataIndex: '_id',
           render: (key) => (
             <span>
-              <Button type="primary" shape="circle" icon="edit" onClick={()=>this.openModal(key,'Save Changes')}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes')}/>
                 <Divider type="vertical" />
                 <Popconfirm
                   title="Are you sure？"
                   cancelText="No"
                   okText="Yes"
                   onConfirm={()=>{this.deleteTrainer(key)}}
-                  icon={<Icon type="delete" style={{ color: 'red' }} />}
+                  icon={<DeleteOutlined style={{ color: 'red' }} />}
                 >
-                  <Button type="danger" shape="circle" icon="delete" />
+                  <Button type="danger" shape="circle" icon={<DeleteOutlined />} />
                 </Popconfirm>
               
             </span>
@@ -161,38 +162,38 @@ class AllTrainer extends Component {
         },
       ];
         return (
-            <div className="admin-table-container">
-              <Button type="primary" icon="user-add" style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'Register')}>
-                Add New
-              </Button> 
-              <div className="register-trainer-form-header">
-                <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Trainer</Title>
-              </div>
-              <Table
-                bordered={true}
-                columns={columns}
-                dataSource={this.props.admin.trainerTableData}
-                size="medium"
-                pagination={{ pageSize: 5 }}
-                loading={this.props.admin.trainerTableLoadingStatus}
-                rowKey="_id"
-              />;
-              <Modal
-                visible={this.props.admin.TrainermodalOpened}
-                title={false}
-                onOk={this.handleOk}
-                onCancel={this.closeModal}
-                style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
-                width="40%"
-                destroyOnClose={true}
-                footer={[
-                  
-                ]}
-              >
-                <NewTrainerForm />
-              </Modal>
+          <div className="admin-table-container">
+            <Button type="primary" icon={<UserAddOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'Register')}>
+              Add New
+            </Button> 
+            <div className="register-trainer-form-header">
+              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Trainer</Title>
             </div>
-        )
+            <Table
+              bordered={true}
+              columns={columns}
+              dataSource={this.props.admin.trainerTableData}
+              size="medium"
+              pagination={{ pageSize: 5 }}
+              loading={this.props.admin.trainerTableLoadingStatus}
+              rowKey="_id"
+            />;
+            <Modal
+              visible={this.props.admin.TrainermodalOpened}
+              title={false}
+              onOk={this.handleOk}
+              onCancel={this.closeModal}
+              style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
+              width="40%"
+              destroyOnClose={true}
+              footer={[
+                
+              ]}
+            >
+              <NewTrainerForm />
+            </Modal>
+          </div>
+        );
     }
 }
 

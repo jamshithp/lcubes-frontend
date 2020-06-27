@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './trainerRegister.css';
-import {Row,Col,Form, Icon, Input, Button,Select,Typography  } from 'antd';
+import { HomeOutlined, IdcardOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Row, Col, Input, Button, Select, Typography } from 'antd';
 import queryString from 'query-string';
 import apis from '../../../services/Apis';
 import { Post } from '../../../services/axiosCall';
@@ -104,7 +107,7 @@ class TraineeRegisterForm extends Component {
                                             rules: [{ required: true, message: 'Please input your name' }],
                                         })(
                                             <Input
-                                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                             placeholder="Name"
                                             />,
                                         )}
@@ -123,7 +126,7 @@ class TraineeRegisterForm extends Component {
                                             }],
                                         })(
                                             <Input
-                                            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            prefix={<MailOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                             placeholder="Email Id"
                                             />,
                                         )}
@@ -150,7 +153,7 @@ class TraineeRegisterForm extends Component {
                                             }],
                                         })(
                                             <Input
-                                            prefix={<Icon type="idcard" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            prefix={<IdcardOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                             placeholder="Organisation"
                                             />,
                                         )}
@@ -162,7 +165,7 @@ class TraineeRegisterForm extends Component {
                                             rules: [{ required: true, message: 'Please input your name' }],
                                         })(
                                             <Input
-                                            prefix={<Icon type="home" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                            prefix={<HomeOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                             placeholder="Location"
                                             />,
                                         )}
@@ -182,8 +185,8 @@ class TraineeRegisterForm extends Component {
                         <Title style={{color:'#fff'}} level={4}>An email containing your test link has been sent to {this.state.user.emailid}</Title>
                         <Button type="primary" onClick={this.resendMail}>Resend Mail</Button>
                     </div>}
-                </div>  
-        )
+                </div>
+        );
     }
 }
 

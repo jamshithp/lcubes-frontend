@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Form, InputNumber , Input, Button,Select  } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { InputNumber, Input, Button, Select } from 'antd';
 import { changeStep,changeBasicNewTestDetails } from '../../../actions/testAction';
 import { SecurePost } from '../../../services/axiosCall';
 import './newtest.css';

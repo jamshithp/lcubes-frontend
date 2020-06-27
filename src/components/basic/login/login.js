@@ -1,5 +1,8 @@
 import React from "react";
-import { Form, Input, Icon, Button } from 'antd';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
+import { Input, Button } from 'antd';
 import './login.css';
 import { connect } from 'react-redux';
 import { login, logout } from '../../../actions/loginAction';
@@ -50,7 +53,7 @@ class Login extends React.Component{
             return <Redirect to={this.props.user.userOptions[0].link} />
         }
         else{
-            return(
+            return (
                 <div className="login-container">
                     <div className="login-inner">
                         <Form  onSubmit={this.handleSubmit}>
@@ -67,7 +70,7 @@ class Login extends React.Component{
                                         },
                                     ],
                                 })(<Input
-                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     placeholder="Username"/>)}
                             </Form.Item>
                             <Form.Item label="Password" hasFeedback>
@@ -79,7 +82,7 @@ class Login extends React.Component{
                                     ],
                                 })(
                                     <Input
-                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
                                     type="password"
                                     placeholder="Password"
                                     />,
@@ -93,7 +96,7 @@ class Login extends React.Component{
                         </Form>
                     </div>
                 </div>
-            )
+            );
         }
     }
 
