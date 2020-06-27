@@ -1,6 +1,6 @@
 import { Modal } from 'antd';
 
-export default function Alert(s='warning',h,b) {
+export default function Alert(s,h,b) {
     if(s==='success'){
         return (
             Modal.success({
