@@ -48,6 +48,8 @@ const apis={
     LOGIN : "/api/v1/login/",
     GET_ALL_INSTITUATION :'/InstitutionService/getAllInstitutions',
     UPATE_INSTITUTION_STATUS:'/InstitutionService/updateStatusOfInstitution',
+    ADD_COURSE:'/InstitutionService/AddCourse',
+    GET_ALL_COURSE:'/InstitutionService/getAllCourse',
     GETDETAILSUSER : "/api/v1/user/details",
     GET_ALL_TRAINER :'/api/v1/admin/trainer/details/all',
     GET_SINGLE_TRAINER_DETAILS : '/api/v1/admin/trainer/details',
