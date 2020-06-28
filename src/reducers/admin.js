@@ -16,8 +16,8 @@ const initialState = {
     Subjectmode : 'New Topic',
     SubjectId : null,
     SubjectsearchText : '',
-    SubjectTableLoading : false, 
-    subjectDetails :{}    
+    SubjectTableLoading : false,
+    subjectDetails :{}
 }
 
 export default (state = initialState, action )=>{

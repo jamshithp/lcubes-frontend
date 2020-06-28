@@ -12,6 +12,7 @@ import {
     ChangeSubjectTableData,
     ChangeSubjectModalState
 } from '../../../actions/adminAction';
+import {default as UUID} from "node-uuid";
 
 class NewTopics extends Component {
 
@@ -23,7 +24,7 @@ class NewTopics extends Component {
                 SecurePost({
                     url : `${apis.ADD_COURSE}`,
                     data : {
-                        courseId : this.props.admin.SubjectId,
+                        courseId : new Date().getTime(),
                         courseName : values.courseName,
                         courseType:values.courseType,
                         courseDescription:values.courseDescription,

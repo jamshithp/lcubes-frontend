@@ -2,8 +2,11 @@ const initialState = {
     NewQuestionmodalOpened : false,
     AllQuestionconfirmDirty: false,
     QuestionsearchText : '',
-    QuestionTableLoading : false, 
+    QuestionTableLoading : false,
     QuestionTableData : [],
+    StudentsTableLoading : false,
+    StudentsTableData : [],
+    StudentSearchText: '',
     selectedSubjects:[],
     QuestionFormData:{},
     fifthoptioAddButtonVisible:true,
@@ -38,6 +41,17 @@ export default (state = initialState, action )=>{
                 ...state,
                 QuestionTableLoading : action.payload1,
                 QuestionTableData : action.payload2
+            }
+        case 'CHANGE_STUDENT_SEARCH_TEXT':
+            return {
+                ...state,
+                StudentSearchText : action.payload
+            }
+        case 'CHANGE_STUDENTS_TABLE_LOADING_STATUS':
+            return {
+                ...state,
+                StudentsTableLoading : action.payload1,
+                StudentsTableData : action.payload2
             }
         case 'ADD_FIFTH_OPTION':
             return {

@@ -1,10 +1,12 @@
 import React from 'react';
 import './backbone.css';
 import { connect } from 'react-redux';
+import { pathOr } from 'ramda';
 import AllTrainer from '../admin/allTrainer/alltrainer';
 import AllTopics from '../admin/allTopics/alltopics.js';
 import AllQuestions from '../trainer/allquestions/allquestion';
 import AllTests from '../trainer/alltests/alltest';
+import AllStudents from '../trainer/allStudents/allStudents';
 import ConductTest from '../trainer/conducttest/conducttest';
 import NewTest from '../trainer/newtest/newtest';
 import auth from '../../services/AuthServices';
@@ -88,13 +90,21 @@ class Dashboard extends React.Component{
 
     render(){
         let torender = null;
-        console.log("params",this.props.match.params.options)
+        const {user} = this.props;
+    
+        const Username = user.userDetails.category === "Institution" ?
+        pathOr("", [ 'userDetails','institution','name'], user):
+        pathOr("", ['userDetails','user','firstName'], user)
+        console.log("Username",Username)
+        ;
         if(this.props.match.params.options==='instituations'){
-            console.log("inside my cond",)
             torender = <AllInstituation/>;
         }
         else if(this.props.match.params.options==='listtrainers'){
             torender = <AllTrainer/>;
+        }
+        else if(this.props.match.params.options==='students'){
+            torender = <AllStudents/>;
         }
         else if(this.props.match.params.options==='listsubjects'){
             torender = <AllTopics/>
@@ -121,7 +131,6 @@ class Dashboard extends React.Component{
             torender=<ErrorPage />
         }
 
-        console.log("torender",torender)
         return (
             <Layout>
                 <Sider trigger={null} collapsible collapsed={this.state.collapsed}
@@ -154,7 +163,6 @@ class Dashboard extends React.Component{
                 </Sider>
                 <Layout>
                     <Header theme="dark" style={{ position:'fixed',width:'100vw',paddingLeft: '10px',zIndex:'1000' }}>
-                    
                         <LegacyIcon
                             className="trigger"
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -162,6 +170,7 @@ class Dashboard extends React.Component{
                             style={{color:'#fff',fontSize:'20px'}}
                             />
                         <ul className="user-options-list">
+                            <li className="username">{Username}</li>
                             <li>
                                 <Tooltip placement="bottom" title="Log Out">
                                     <Button type="primary" size="large" shape="circle" onClick={this.logOut} className="logout-button">
@@ -173,7 +182,6 @@ class Dashboard extends React.Component{
                                 <img src={main} alt="company logo" className="d-logo" />
                             </li>
                         </ul>
-                            
                     </Header>
                     <Content
                         style={{

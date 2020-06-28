@@ -91,6 +91,13 @@ class AllTopics extends Component {
       const { Title } = Typography;
       const columns = [
         {
+          title: 'Course ID',
+          dataIndex: 'courseId',
+          key: 'courseId',
+          width: '25%',
+          ...this.getColumnSearchProps('courseId'),
+        },
+        {
           title: 'Name',
           dataIndex: 'courseName',
           key: 'courseName',
