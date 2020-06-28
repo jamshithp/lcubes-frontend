@@ -11,6 +11,7 @@ import Alert from '../../common/alert';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Register from '../../forms/registration'
+import main from './cube.png';
 
 class Login extends React.Component{
     constructor(props){
@@ -80,6 +81,7 @@ class Login extends React.Component{
         else{
             return (
                 <div className="login-container">
+                    <div className="icon"><img src={main} alt="company logo" className="front-logo" /></div>
                     <div className="login-inner">
                         <Form  onSubmit={this.handleSubmit}>
                             <Form.Item label="Email" hasFeedback>
@@ -120,10 +122,10 @@ class Login extends React.Component{
                             </Form.Item>
                             <Divider>New Registration</Divider>
                             <div className="button-container">
-                                <Button type="defalut" block value='institute' onClick={this.showModal}>
+                                <Button type="primary" shape="round" block value='institute' size='Default' onClick={this.showModal}>
                                 Register as Institute
                                 </Button>
-                                <Button type="defalut" value='student' block onClick={this.showModal2}>
+                                <Button type="primary" shape="round" value='student' block onClick={this.showModal2}>
                                 Register as Student
                                 </Button>
                             </div>

@@ -1,6 +1,6 @@
 .header-container-2{
     position: absolute;
-    padding: 0px 50px; 
+    padding: 0px 50px;
     width:100%;
 }
 .logo{
@@ -22,7 +22,7 @@
     display: inline;
     color: aliceblue;
     font-size: 17px;
-    
+
 }
 .p{
     padding-right:50px;

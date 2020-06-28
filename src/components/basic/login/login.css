@@ -1,18 +1,26 @@
 .login-container{
     width:365px;
-    height:463px;
-    background-image: linear-gradient(to right,rgb(80,190,189),rgb(0,153,153),rgb(0,153,203));
+    height:500px;
+    background-color: white;
     border-radius: 5px;
     position: relative;
-    top:50%;
-    bottom:50%;
-    transform: translateY(-35%);
-    float: right;
-    right:100px;
+    background-color: rgba(0,0,0, 0.4);
 }
-
+.login-container label,
+.login-container span.ant-divider-inner-text{
+  color: white;
+}
+.login-container .front-logo{
+  width:100px;
+}
+.login-container  .icon{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
 .login-inner{
     padding: 50px 30px;
+    padding-top: 10px;
 }
 
 .lable{
@@ -26,8 +34,20 @@
 
 .button-container{
     display: flex;
+    justify-content: center;
 }
-
+.button-container button{
+  transition-duration: 0.4s;
+  border-radius: 3px;
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+.button-container button:hover{
+  background-color: #4CAF50;
+    color: white;
+}
 .button-container button {
     margin:5px;
 }
+.login-container .login-inner form .ant-row{display: flow-root;}
