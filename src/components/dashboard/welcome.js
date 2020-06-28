@@ -23,21 +23,20 @@ export default function welcome() {
         </ul>
         <br/>
         <h2><b>Instiutation Instructions</b></h2>
-        <h3>1. All Trainers</h3>
-        <h4>   List of existing trainers.</h4>
+        <h3>1. All Students</h3>
+        <h4>   List of Students trainers.</h4>
         <ul>
-          <li>Add New - Create new trainer account.</li>
+          <li>Add New - Create new Students account.</li>
           <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon={<EditOutlined />} /> Edit trainer details.</p><Button size = 'small' type="primary" shape="circle" icon={<DeleteOutlined />} /> Delete trainer account.</li>
         </ul>
         <br/>
-        <h2><b>Trainer Instructions</b></h2>
-        <h3>1. All Questions</h3>
+        <h3>2. All Questions</h3>
         <h4>   List of existing questions.</h4>
         <ul>
           <li>Add New - Create new question.</li>
           <li>Action - <br/> <p style={{marginBottom:'2px'}}><Button size = 'small' type="primary" shape="circle" icon={<InfoOutlined />} />  Question details & body.</p><Button size = 'small' type="primary" shape="circle" icon={<DeleteOutlined />} /> Delete question.</li>
         </ul>
-        <h3>2. All Tests</h3>
+        <h3>3. All Tests</h3>
         <h4>   List of existing tests</h4>
         <ul>
           <li>Action - <Button size = 'small' type="primary" shape="circle" icon={<InfoOutlined />} /> <ul>

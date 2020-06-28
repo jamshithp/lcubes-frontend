@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/trainee/taketest" component={MainPortal}/>
         </nav>
       </BrowserRouter>
-    </Provider> 
+    </Provider>
   );
 }
 

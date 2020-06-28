@@ -35,3 +35,8 @@
     display: inline;
     margin-right: 30px;
 }
+
+.username{
+    color: lavender;
+    text-align: right;
+}

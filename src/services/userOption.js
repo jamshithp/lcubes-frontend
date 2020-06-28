@@ -28,6 +28,16 @@ export const TRAINER_PERMISSIONS=[
         link : '/user/home'
     },
     {
+        display : 'All Courses',
+        icon : 'book',
+        link : '/user/listsubjects'
+    },
+    {
+        display : 'All students',
+        icon : 'book',
+        link : '/user/students'
+    },
+    {
         display : 'All Questions',
         icon : 'form',
         link : '/user/listquestions'

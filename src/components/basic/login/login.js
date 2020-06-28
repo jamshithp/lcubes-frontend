@@ -6,11 +6,11 @@ import { Input, Button, Modal, Divider } from 'antd';
 import './login.css';
 import { connect } from 'react-redux';
 import { login, logout } from '../../../actions/loginAction';
-import auth from '../../../services/AuthServices';
 import Alert from '../../common/alert';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-import Register from '../../forms/registration'
+import apis from '../../../services/Apis';
+import Register from '../../forms/registration';
+import { SecurePost } from '../../../services/axiosCall';
 
 class Login extends React.Component{
     constructor(props){
@@ -52,7 +52,10 @@ class Login extends React.Component{
                     password:values.password
                 };
                 console.log('Received values of form: ', values);
-                axios.post('http://3.22.24.45:8090/loginService/login',{...data}).then((response)=>{
+                SecurePost({
+                    url : `${apis.LOGIN}`,
+                    data:data
+                }).then((response)=>{
                     console.log(response);
                     if(response.data.message === "Success"){
                         this.props.login(response.data.data)
