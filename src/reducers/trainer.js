@@ -7,6 +7,9 @@ const initialState = {
     StudentsTableLoading : false,
     StudentsTableData : [],
     StudentSearchText: '',
+    CourseTableLoading : false,
+    CourseTableData : [],
+    CourseSearchText: '',
     selectedSubjects:[],
     QuestionFormData:{},
     fifthoptioAddButtonVisible:true,
@@ -41,6 +44,12 @@ export default (state = initialState, action )=>{
                 ...state,
                 QuestionTableLoading : action.payload1,
                 QuestionTableData : action.payload2
+            }
+        case 'CHANGE_COURSE_TABLE_LOADING_STATUS':
+            return {
+                ...state,
+                CourseTableLoading : action.payload1,
+                CourseTableData : action.payload2
             }
         case 'CHANGE_STUDENT_SEARCH_TEXT':
             return {

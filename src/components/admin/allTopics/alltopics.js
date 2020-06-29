@@ -8,8 +8,14 @@ import {
     ChangeSubjectTableData,
     ChangeSubjectModalState
 } from '../../../actions/adminAction';
+import {
+  ChangeCourseSearchText,
+  ChangeCourseTableData,
+  ChangeCourseModalState
+} from '../../../actions/trainerAction';
 import './alltopics.css'
 import NewSubjectForm from '../newTopics/newtopics';
+
 
 
 
@@ -24,7 +30,9 @@ class AllTopics extends Component {
   }
 
   componentDidMount(){
-    this.props.ChangeSubjectTableData();
+    const {user} = this.props;
+    user.userDetails.category === "Institution" ?
+    this.props.ChangeCourseTableData(user.userDetails.institution.id):this.props.ChangeSubjectTableData();
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -89,6 +97,12 @@ class AllTopics extends Component {
 
     render() {
       const { Title } = Typography;
+      const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
+      const dataSource = IsAdmin?this.props.admin.subjectTableData:this.props.trainer.CourseTableData.filter(
+        course=>course.course).map(course=>{
+          return course.course;
+      });
+      console.log("dataSource",dataSource)
       const columns = [
         {
           title: 'Course ID',
@@ -140,7 +154,7 @@ class AllTopics extends Component {
             <Table
               bordered={true}
               columns={columns}
-              dataSource={this.props.admin.subjectTableData}
+              dataSource={dataSource}
               size="medium"
               pagination={{ pageSize: 5 }}
               loading={this.props.admin.SubjectTableLoading}
@@ -165,11 +179,17 @@ class AllTopics extends Component {
 }
 
 const mapStateToProps = state => ({
-    admin : state.admin
+    user:state.user,
+    admin : state.admin,
+    trainer:state.trainer,
 });
 
 export default connect(mapStateToProps,{
     ChangeSubjectSearchText,
     ChangeSubjectTableData,
-    ChangeSubjectModalState
+    ChangeSubjectModalState,
+    ChangeCourseSearchText,
+    ChangeCourseTableData,
+    ChangeCourseModalState,
+
 })(AllTopics);

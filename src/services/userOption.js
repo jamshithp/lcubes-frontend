@@ -34,7 +34,7 @@ export const TRAINER_PERMISSIONS=[
     },
     {
         display : 'All students',
-        icon : 'book',
+        icon : 'Team',
         link : '/user/students'
     },
     {

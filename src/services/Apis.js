@@ -54,6 +54,7 @@ const apis={
     USER_REG_URL:'/userService/registerUser',
     GET_COURSE_BY_INSTITUTION :'/InstitutionService/getCourseDetailsByInstitution/',
     GET_ALL_STUDENTS_BY_INSTITUATION: '/userService/getAllStudentByInstitution/',
+    UPATE_STUDENT_STATUS:'userService/updateUserStatus',
     CREATE_SUBJECT : '/api/v1/subject/create',
     GET_ALL_QUESTIONS : '/api/v1/questions/details/all',
     DELETE_QUESTION:'/api/v1/questions/delete',

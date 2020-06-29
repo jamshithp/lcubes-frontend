@@ -57,19 +57,20 @@ class AllStudents extends Component {
   }
 
   changeStatus = (status,id) => {
-    console.log("id",id,"status",status)
     SecurePost({
-      url : `${apis.UPATE_INSTITUTION_STATUS}`,
+      url : `${apis.UPATE_STUDENT_STATUS}`,
       data : {
-        institutionId : id,
+        userId : id,
         status:{
-          id:status,
+          id:status
         }
       }
     }).then((response)=>{
       if(response.data.message === "Success"){
         Alert('success','Success',response.data.message);
-        this.props.ChangeStudentsTableData();
+        const { user } = this.props;
+        const instId =  pathOr("", [ 'userDetails','institution','id'], user);
+        this.props.ChangeStudentsTableData(instId);
       }
       else{
         return Alert('warning','Warning!',response.data.message);
@@ -170,6 +171,17 @@ class AllStudents extends Component {
             width: '25%',
             ...this.getColumnSearchProps('email'),
         },
+        {
+            title: 'status',
+            dataIndex: 'status',
+            key: 'contact',
+            render: (status) => (
+              <span>
+                {status=== null?"Pending":status.name}
+              </span>
+            ),
+            //...this.getColumnSearchProps('status.name'),
+          },
         {
           title: 'Action',
           key: '_id',
