@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './newtrainer.css';
 import { Form } from '@ant-design/compatible';
-import '@ant-design/compatible/assets/index.css';
 import { Input, Button, Select } from 'antd';
 import {SecurePost} from '../../../services/axiosCall';
 import apis from '../../../services/Apis';

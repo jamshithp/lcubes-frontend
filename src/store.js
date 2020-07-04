@@ -7,7 +7,7 @@ import rootReducer from './reducers/index';
 
 
 
-const middleware=[thunk,logger];
+const middleware=[thunk];
 
 const store = createStore(rootReducer, composeWithDevTools(
     applyMiddleware(...middleware),

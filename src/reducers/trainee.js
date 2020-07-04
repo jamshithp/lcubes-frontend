@@ -19,7 +19,7 @@ const initialState = {
     activeQuestionIndex:0,
     questions:[],
     answers:[],
-    hasGivenFeedBack:false
+    hasGivenFeedBack:false,
 }
 
 

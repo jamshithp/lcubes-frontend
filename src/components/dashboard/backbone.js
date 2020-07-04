@@ -3,7 +3,7 @@ import './backbone.css';
 import { connect } from 'react-redux';
 import { pathOr } from 'ramda';
 import AllTrainer from '../admin/allTrainer/alltrainer';
-import AllTopics from '../admin/allTopics/alltopics.js';
+import AllCourses from '../admin/allCourses/allCourses.js';
 import AllQuestions from '../trainer/allquestions/allquestion';
 import AllTests from '../trainer/alltests/alltest';
 import AllStudents from '../trainer/allStudents/allStudents';
@@ -106,8 +106,8 @@ class Dashboard extends React.Component{
         else if(this.props.match.params.options==='students'){
             torender = <AllStudents/>;
         }
-        else if(this.props.match.params.options==='listsubjects'){
-            torender = <AllTopics/>
+        else if(this.props.match.params.options==='listCourses'){
+            torender = <AllCourses/>
         }
         else if(this.props.match.params.options==='listquestions'){
             torender = <AllQuestions/>

@@ -17,7 +17,7 @@ export const ADMIN_PERMISSIONS=[
     {
         display : 'All Courses',
         icon : 'book',
-        link : '/user/listsubjects'
+        link : '/user/listCourses'
     }
 ]
 
@@ -30,7 +30,7 @@ export const TRAINER_PERMISSIONS=[
     {
         display : 'All Courses',
         icon : 'book',
-        link : '/user/listsubjects'
+        link : '/user/listCourses'
     },
     {
         display : 'All students',

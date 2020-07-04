@@ -18,7 +18,8 @@ const initialState = {
     DataActiveTestDetails : {
         testDetailsId : null,
         testquestions :[]
-    }
+    },
+    CoursemodalOpened : false,
 }
 
 
@@ -115,6 +116,11 @@ export default (state = initialState, action )=>{
                     ...state.DataActiveTestDetails,
                     testquestions:action.payload
                 }
+            }
+        case 'CHANGE_COURSE_MODAL_STATE':
+            return {
+                ...state,
+                CoursemodalOpened : action.payload1,
             }
         default:
             return state;

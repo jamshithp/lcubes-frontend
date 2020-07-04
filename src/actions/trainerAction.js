@@ -96,7 +96,7 @@ export const ChangeQuestionModalState = (d1)=> dispatch =>{
 
     export const ChangeCourseModalState = (d1)=> dispatch =>{
         dispatch({
-            type : 'CHANGE_QUESTION_MODAL_STATE',
+            type : 'CHANGE_COURSE_MODAL_STATE',
             payload1 : d1,
         })
     }

@@ -13,26 +13,29 @@ import {
   ChangeCourseTableData,
   ChangeCourseModalState
 } from '../../../actions/trainerAction';
-import './alltopics.css'
-import NewSubjectForm from '../newTopics/newtopics';
+import './allCourses.css'
+import NewCourseForm from '../newCourse/newCourse.js';
+import AddCourseForm from '../../trainer/addCourses/addCourses';
 
 
 
 
-class AllTopics extends Component {
+class AllCourses extends Component {
 
-  openModal = (id,mode)=>{
-    this.props.ChangeSubjectModalState(true,id,mode);
+  openModal = (id,mode,IsAdmin)=>{
+    IsAdmin ? this.props.ChangeSubjectModalState(true,id,mode):this.props.ChangeCourseModalState(true);
   }
   
-  closeModal = ()=>{
-    this.props.ChangeSubjectModalState(false,null,'New Topic');
+  closeModal = (IsAdmin)=>{
+    IsAdmin ? this.props.ChangeSubjectModalState(false,null,'New Topic'):this.props.ChangeCourseModalState(false);
   }
+
 
   componentDidMount(){
     const {user} = this.props;
-    user.userDetails.category === "Institution" ?
-    this.props.ChangeCourseTableData(user.userDetails.institution.id):this.props.ChangeSubjectTableData();
+    user.userDetails.category === "Institution" &&
+    this.props.ChangeCourseTableData(user.userDetails.institution.id);
+    this.props.ChangeSubjectTableData();
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -98,10 +101,9 @@ class AllTopics extends Component {
     render() {
       const { Title } = Typography;
       const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
-      const dataSource = IsAdmin?this.props.admin.subjectTableData:this.props.trainer.CourseTableData.filter(
-        course=>course.course).map(course=>{
-          return course.course;
-      });
+      const UniqueDataSource = [...new Set(this.props.trainer.CourseTableData.filter(
+        course=>course.course).map(course=>course.course))]
+      const dataSource = IsAdmin?this.props.admin.subjectTableData:UniqueDataSource;
       console.log("dataSource",dataSource)
       const columns = [
         {
@@ -138,7 +140,7 @@ class AllTopics extends Component {
           dataIndex: '_id',
           render: (key) => (
             <span>
-              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes')}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes',IsAdmin)}/>
             </span>
           ),
         },
@@ -161,17 +163,17 @@ class AllTopics extends Component {
               rowKey="_id"
             />;
             <Modal
-              visible={this.props.admin.SubjectmodalOpened}
+              visible={IsAdmin ?this.props.admin.SubjectmodalOpened:this.props.trainer.CoursemodalOpened}
               title={false}
               onOk={this.handleOk}
-              onCancel={this.closeModal}
+              onCancel={()=>this.closeModal(IsAdmin)}
               style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
               destroyOnClose={true}
               footer={[
                 
               ]}
             >
-              <NewSubjectForm />
+             { IsAdmin ? <NewCourseForm />:<AddCourseForm/>}
             </Modal>
           </div>
         );
@@ -192,4 +194,4 @@ export default connect(mapStateToProps,{
     ChangeCourseTableData,
     ChangeCourseModalState,
 
-})(AllTopics);
+})(AllCourses);

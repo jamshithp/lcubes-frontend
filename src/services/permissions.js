@@ -12,7 +12,7 @@ export const AdminPermissions = [
     {
         display : 'All Subjects',
         icon : 'file-text',
-        link : '/user/listsubjects'
+        link : '/user/listCourses'
     }
 
 ]
