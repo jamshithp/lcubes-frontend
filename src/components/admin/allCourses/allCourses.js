@@ -23,6 +23,7 @@ import AddCourseForm from '../../trainer/addCourses/addCourses';
 class AllCourses extends Component {
 
   openModal = (id,mode,IsAdmin)=>{
+    console.log("IsAdmin",IsAdmin)
     IsAdmin ? this.props.ChangeSubjectModalState(true,id,mode):this.props.ChangeCourseModalState(true);
   }
   
@@ -101,9 +102,10 @@ class AllCourses extends Component {
     render() {
       const { Title } = Typography;
       const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
-      const UniqueDataSource = [...new Set(this.props.trainer.CourseTableData.filter(
-        course=>course.course).map(course=>course.course))]
-      const dataSource = IsAdmin?this.props.admin.subjectTableData:UniqueDataSource;
+      const dataSource = IsAdmin?this.props.admin.subjectTableData:this.props.trainer.CourseTableData.filter(
+        course=>course.course).map(course=>{
+          return course.course;
+      });
       console.log("dataSource",dataSource)
       const columns = [
         {
@@ -140,14 +142,14 @@ class AllCourses extends Component {
           dataIndex: '_id',
           render: (key) => (
             <span>
-              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes',IsAdmin)}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes')}/>
             </span>
           ),
         },
       ];
         return (
           <div className="admin-table-container">
-            <Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic')}>
+            <Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic',IsAdmin)}>
               Add New
             </Button>
             <div className="register-trainer-form-header">

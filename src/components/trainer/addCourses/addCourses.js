@@ -27,7 +27,7 @@ class NewCourse extends Component {
         const courseList = [this.props.admin.subjectTableData.find(course =>course.courseType === this.state.SelectedType).courseId];
         console.log("courseList",courseList)
         SecurePost({
-            url : `${apis.ADD_COURSE}`,
+            url : `${apis.ADD_COURSE_DETAILS}`,
             data : {
                 courseList : courseList,
                 institutionId : this.props.instituationId,
