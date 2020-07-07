@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EditOutlined, FileTextOutlined, SearchOutlined } from '@ant-design/icons';
+import { EditOutlined, FileTextOutlined, SearchOutlined,PlusCircleOutlined } from '@ant-design/icons';
 import { Table, Input, Button, Typography, Modal } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
@@ -22,13 +22,21 @@ import AddCourseForm from '../../trainer/addCourses/addCourses';
 
 class AllCourses extends Component {
 
-  openModal = (id,mode,IsAdmin)=>{
-    console.log("IsAdmin",IsAdmin)
-    IsAdmin ? this.props.ChangeSubjectModalState(true,id,mode):this.props.ChangeCourseModalState(true);
+  constructor(props){
+    super(props);
+    this.state={
+      IsCreate :false,
+    }
+  }
+
+  openModal = (id,mode,IsCreate)=>{
+    console.log("IsCreate",IsCreate)
+    IsCreate ? this.props.ChangeSubjectModalState(true,id,mode):this.props.ChangeCourseModalState(true);
+    this.setState({IsCreate:IsCreate});
   }
   
-  closeModal = (IsAdmin)=>{
-    IsAdmin ? this.props.ChangeSubjectModalState(false,null,'New Topic'):this.props.ChangeCourseModalState(false);
+  closeModal = (IsCreate)=>{
+    IsCreate ? this.props.ChangeSubjectModalState(false,null,'New Topic'):this.props.ChangeCourseModalState(false);
   }
 
 
@@ -106,13 +114,12 @@ class AllCourses extends Component {
         course=>course.course).map(course=>{
           return course.course;
       });
-      console.log("dataSource",dataSource)
       const columns = [
         {
           title: 'Course ID',
           dataIndex: 'courseId',
           key: 'courseId',
-          width: '25%',
+          width: '5%',
           ...this.getColumnSearchProps('courseId'),
         },
         {
@@ -133,7 +140,7 @@ class AllCourses extends Component {
           title: 'Course Description',
           dataIndex: 'courseDescription',
           key: 'courseDescription',
-          width: '25%',
+          width: '40%',
           ...this.getColumnSearchProps('courseDescription'),
         },
         {
@@ -149,9 +156,12 @@ class AllCourses extends Component {
       ];
         return (
           <div className="admin-table-container">
-            <Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px'}} onClick={()=>this.openModal(null,'New Topic',IsAdmin)}>
-              Add New
-            </Button>
+            {!IsAdmin && <Button type="primary" icon={<PlusCircleOutlined/>} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal(null,'New Topic',false)}>
+              Add Course
+            </Button>}
+            {<Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal(null,'New Topic',true)}>
+              Create Course
+            </Button>}
             <div className="register-trainer-form-header">
               <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Courses</Title>
             </div>
@@ -165,17 +175,17 @@ class AllCourses extends Component {
               rowKey="_id"
             />;
             <Modal
-              visible={IsAdmin ?this.props.admin.SubjectmodalOpened:this.props.trainer.CoursemodalOpened}
+              visible={this.state.IsCreate ?this.props.admin.SubjectmodalOpened:this.props.trainer.CoursemodalOpened}
               title={false}
               onOk={this.handleOk}
-              onCancel={()=>this.closeModal(IsAdmin)}
+              onCancel={()=>this.closeModal(this.state.IsCreate)}
               style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
               destroyOnClose={true}
               footer={[
                 
               ]}
             >
-             { IsAdmin ? <NewCourseForm />:<AddCourseForm/>}
+             { this.state.IsCreate ? <NewCourseForm />:<AddCourseForm/>}
             </Modal>
           </div>
         );
