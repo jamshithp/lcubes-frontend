@@ -33,7 +33,6 @@ class AllInstituation extends Component {
   }
   
   componentDidMount(){
-      console.log("componentDidMount")
     this.props.ChangeInstituationTableData();
   }
 
@@ -57,7 +56,6 @@ class AllInstituation extends Component {
   }
 
   changeStatus = (status,id) => {
-    console.log("id",id,"status",status)
     SecurePost({
       url : `${apis.UPATE_INSTITUTION_STATUS}`,
       data : {
@@ -140,7 +138,6 @@ class AllInstituation extends Component {
       };
 
     render() {
-        console.log("inside inst")
       const { Title } = Typography;
       const columns = [
         {

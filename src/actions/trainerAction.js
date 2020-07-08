@@ -1,6 +1,7 @@
 import apis from '../services/Apis';
 import Alert from '../components/common/alert';
 import { SecurePost ,Get } from '../services/axiosCall';
+import axios from 'axios';
 
 
 export const ChangeStudentsTableData = (id)=> dispatch =>{
@@ -114,9 +115,9 @@ export const ChangeSubjectTableData = (id)=> dispatch =>{
         payload1 : true,
         payload2 : []
     })
-    Get({
-        url:  `${apis.GET_COURSE_BY_INSTITUTION}/${id}`
-    }).then((response)=>{
+    const url = `http://54.160.111.123:9091${apis.GET_ALL_CATEGORY}`;
+    axios.request({ method: 'get', url })
+    .then((response)=>{
         console.log("ChangeStudentsTableData",response)
         if(response.data.message === "Success"){
             dispatch({

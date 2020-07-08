@@ -42,7 +42,6 @@ export const ChangeTrainerModalState = (d1,d2,d3)=> dispatch =>{
         SecureGet({
             url : `${apis.GET_SINGLE_TRAINER_DETAILS}/${d2}`
         }).then((response)=>{
-            console.log(response);
             if(response.data.success){
                 dispatch({
                     type : 'CHANGE_TRAINER_MODAL_STATE',
@@ -106,7 +105,6 @@ export const ChangeTrainerTableData = ()=> dispatch =>{
     SecureGet({
         url:  `${apis.GET_ALL_TRAINER}`
     }).then((response)=>{
-        console.log(response);
         if(response.data.success){
             dispatch({
                 type : 'CHANGE_TRAINER_TABLE_LOADING_STATUS',
@@ -183,7 +181,6 @@ export const ChangeSubjectSearchText = (d)=> dispatch =>{
 }
 
 export const ChangeAdminCourseTableData = (d)=> dispatch =>{
-    console.log('fetchng subjects');
     dispatch({
        type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
        payload1 : true,
@@ -192,7 +189,6 @@ export const ChangeAdminCourseTableData = (d)=> dispatch =>{
     SecureGet({
         url:  `${apis.GET_ALL_COURSE}`
     }).then((response)=>{
-        console.log(response);
         if(response.data.message = "Success"){
             dispatch({
                 type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',

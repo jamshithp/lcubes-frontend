@@ -96,7 +96,6 @@ class Dashboard extends React.Component{
         const Username = user.userDetails.category === "Institution" ?
         pathOr("", [ 'userDetails','institution','name'], user):
         pathOr("", ['userDetails','user','firstName'], user)
-        console.log("Username",Username)
         ;
         if(this.props.match.params.options==='instituations'){
             torender = <AllInstituation/>;
@@ -127,11 +126,9 @@ class Dashboard extends React.Component{
         }
         else if(this.props.match.params.options==='conducttest'){
             let params = queryString.parse(this.props.location.search)
-            console.log(params)
             torender=<ConductTest {...params}/>
         }
         else{
-            console.log("inside error",)
             torender=<ErrorPage />
         }
 
