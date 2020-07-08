@@ -21,7 +21,7 @@ import {
   ChangeSelectedSubjects
 } from '../../../actions/trainerAction';
 import { 
-  ChangeSubjectTableData
+  ChangeAdminCourseTableData
 } from '../../../actions/adminAction';
 import './allquestion.css'
 import Alert from '../../../components/common/alert';
@@ -58,7 +58,7 @@ class AllQuestions extends Component {
   }
 
   componentDidMount(){
-    this.props.ChangeSubjectTableData();
+    this.props.ChangeAdminCourseTableData();
     this.props.ChangeQuestionTableData(this.props.trainer.selectedSubjects);
   }
 
@@ -278,5 +278,5 @@ export default connect(mapStateToProps,{
   ChangeQuestionTableData,
   ChangeQuestionSearchText,
   ChangeSelectedSubjects,
-  ChangeSubjectTableData
+  ChangeAdminCourseTableData,
 })(AllQuestions);

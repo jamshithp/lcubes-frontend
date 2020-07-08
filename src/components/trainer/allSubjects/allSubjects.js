@@ -3,24 +3,18 @@ import { EditOutlined, FileTextOutlined, SearchOutlined,PlusCircleOutlined } fro
 import { Table, Input, Button, Typography, Modal } from 'antd';
 import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
-import { 
-    ChangeSubjectSearchText,
-    ChangeAdminCourseTableData,
-    ChangeAdminCourseModalState
-} from '../../../actions/adminAction';
 import {
   ChangeCourseSearchText,
-  ChangeCourseTableData,
-  ChangeCourseModalState
+  ChangeSubjectTableData,
+  ChangeSubjectModalState
 } from '../../../actions/trainerAction';
-import './allCourses.css'
-import NewCourseForm from '../newCourse/newCourse.js';
-import AddCourseForm from '../../trainer/addCourses/addCourses';
+import './allSubjects.css'
+import NewSubjectForm from '../../trainer/addSubjects/addSubjects';
 
 
 
 
-class AllCourses extends Component {
+class AllSubjects extends Component {
 
   constructor(props){
     super(props);
@@ -29,22 +23,17 @@ class AllCourses extends Component {
     }
   }
 
-  openModal = (id,mode,IsCreate)=>{
-    console.log("IsCreate",IsCreate)
-    IsCreate ? this.props.ChangeAdminCourseModalState(true,id,mode):this.props.ChangeCourseModalState(true);
-    this.setState({IsCreate:IsCreate});
+  openModal = ()=>{
+     this.props.ChangeSubjectModalState(true);
   }
   
-  closeModal = (IsCreate)=>{
-    IsCreate ? this.props.ChangeAdminCourseModalState(false,null,'New Topic'):this.props.ChangeCourseModalState(false);
+  closeModal = ()=>{
+    this.props.ChangeSubjectModalState(false);
   }
 
 
   componentDidMount(){
-    const {user} = this.props;
-    user.userDetails.category === "Institution" &&
-    this.props.ChangeCourseTableData(user.userDetails.institution.id);
-    this.props.ChangeAdminCourseTableData();
+    this.props.ChangeSubjectTableData();
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -109,25 +98,20 @@ class AllCourses extends Component {
 
     render() {
       const { Title } = Typography;
-      const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
-      const dataSource = IsAdmin?this.props.admin.courseTableData:this.props.trainer.CourseTableData.filter(
-        course=>course.course).map(course=>{
-          return course.course;
-      });
       const columns = [
         {
-          title: 'Course ID',
-          dataIndex: 'courseId',
-          key: 'courseId',
+          title: 'Subject ID',
+          dataIndex: 'subjectId',
+          key: 'subjectId',
           width: '5%',
-          ...this.getColumnSearchProps('courseId'),
+          ...this.getColumnSearchProps('subjectId'),
         },
         {
           title: 'Name',
-          dataIndex: 'courseName',
-          key: 'courseName',
+          dataIndex: 'subjectName',
+          key: 'subjectName',
           width: '25%',
-          ...this.getColumnSearchProps('courseName'),
+          ...this.getColumnSearchProps('subjectName'),
         },
         {
           title: 'Course Type',
@@ -156,36 +140,33 @@ class AllCourses extends Component {
       ];
         return (
           <div className="admin-table-container">
-            {!IsAdmin && <Button type="primary" icon={<PlusCircleOutlined/>} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal(null,'New Topic',false)}>
-              Add Course
-            </Button>}
-            {<Button type="primary" icon={<FileTextOutlined />} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal(null,'New Topic',true)}>
-              Create Course
-            </Button>}
+            <Button type="primary" icon={<PlusCircleOutlined/>} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal()}>
+              Add Subject
+            </Button>
             <div className="register-trainer-form-header">
-              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Courses</Title>
+              <Title level={4} style={{color:'#fff',textAlign:'center'}}>List of Subjects</Title>
             </div>
             <Table
               bordered={true}
               columns={columns}
-              dataSource={dataSource}
+              dataSource={this.props.trainer.SubjectTableData}
               size="medium"
               pagination={{ pageSize: 5 }}
-              loading={this.props.admin.courseTableLoading}
+              loading={this.props.trainer.SubjectTableLoading}
               rowKey="_id"
             />;
             <Modal
-              visible={this.state.IsCreate ?this.props.admin.courseModalOpened:this.props.trainer.CoursemodalOpened}
+              visible={this.props.trainer.SubjectmodalOpened}
               title={false}
               onOk={this.handleOk}
-              onCancel={()=>this.closeModal(this.state.IsCreate)}
+              onCancel={()=>this.closeModal()}
               style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
               destroyOnClose={true}
               footer={[
                 
               ]}
             >
-             { this.state.IsCreate ? <NewCourseForm />:<AddCourseForm/>}
+             { <NewSubjectForm />}
             </Modal>
           </div>
         );
@@ -199,11 +180,8 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps,{
-    ChangeSubjectSearchText,
-    ChangeAdminCourseTableData,
-    ChangeAdminCourseModalState,
-    ChangeCourseSearchText,
-    ChangeCourseTableData,
-    ChangeCourseModalState,
+    ChangeSubjectModalState,
+    ChangeSubjectTableData,
 
-})(AllCourses);
+
+})(AllSubjects);

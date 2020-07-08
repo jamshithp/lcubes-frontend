@@ -6,7 +6,6 @@ import {SecurePost} from '../../../services/axiosCall';
 import apis from '../../../services/Apis';
 import Alert from '../../../components/common/alert';
 import {
-    ChangeCourseSearchText,
     ChangeCourseTableData,
     ChangeCourseModalState
   } from '../../../actions/trainerAction';
@@ -24,7 +23,7 @@ class NewCourse extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const courseList = [this.props.admin.subjectTableData.find(course =>course.courseType === this.state.SelectedType).courseId];
+        const courseList = [this.props.admin.courseTableData.find(course =>course.courseType === this.state.SelectedType).courseId];
         console.log("courseList",courseList)
         SecurePost({
             url : `${apis.ADD_COURSE_DETAILS}`,
@@ -50,7 +49,7 @@ class NewCourse extends Component {
 
     handleMenuClick =(e,type) => {
       if(type === 'SelectedCourse') {
-           const courseType =  this.props.admin.subjectTableData.find(course =>course.courseName === e.key).courseType;
+           const courseType =  this.props.admin.courseTableData.find(course =>course.courseName === e.key).courseType;
 
             this.setState({SelectedType:courseType});
         }
@@ -61,10 +60,10 @@ class NewCourse extends Component {
         const { getFieldDecorator } = this.props.form;
         const  { admin } = this.props;
         const CourseNameSet = new Set();
-         admin.subjectTableData.map(course => {
+         admin.courseTableData.map(course => {
             CourseNameSet.add(course.courseName);
          });
-         const CourseType = admin.subjectTableData.filter(course =>course.courseName === this.state.SelectedCourse).map(course =>
+         const CourseType = admin.courseTableData.filter(course =>course.courseName === this.state.SelectedCourse).map(course =>
             course.courseType
         );
         const CourseName = [...CourseNameSet];

@@ -10,13 +10,13 @@ const initialState = {
     trainerEditFormLoadingStatus:false,
     trainerTableData:[],
     trainerdetails:{},
-    subjectTableData : [] ,
-    SubjectmodalOpened : false,
-    SubjectconfirmDirty: false,
+    courseTableData : [] ,
+    courseModalOpened : false,
+    courseConfirmDirty: false,
     Subjectmode : 'New Topic',
     SubjectId : null,
-    SubjectsearchText : '',
-    SubjectTableLoading : false,
+    courseSearchText : '',
+    courseTableLoading : false,
     subjectDetails :{}
 }
 
@@ -55,10 +55,10 @@ export default (state = initialState, action )=>{
                     trainerTableData : action.payload2,
 
                 }
-        case 'CHANGE_SUBJECT_MODAL_STATE':
+        case 'CHANGE_ADMIN_COURSE_MODAL_STATE':
             return {
                 ...state,
-                SubjectmodalOpened : action.payload1,
+                courseModalOpened : action.payload1,
                 SubjectId : action.payload2,
                 Subjectmode : action.payload3,
                 subjectDetails : action.payload4
@@ -68,16 +68,16 @@ export default (state = initialState, action )=>{
                 ...state,
                 SubjectconfirmDirty : action.payload
             }
-        case 'CHANGE_SUBJECT_SEARCH_TEXT':
+        case 'CHANGE_COURSE_SEARCH_TEXT':
                 return {
                     ...state,
-                    SubjectsearchText : action.payload
+                    courseSearchText : action.payload
                 }
-        case 'CHANGE_SUBJECT_TABLE_LOADING_STATUS':
+        case 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS':
                 return {
                     ...state,
-                    SubjectTableLoading : action.payload1,
-                    subjectTableData :action.payload2
+                    courseTableLoading : action.payload1,
+                    courseTableData :action.payload2
                 }
         default:
             return state;
