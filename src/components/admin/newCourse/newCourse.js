@@ -21,7 +21,6 @@ class NewTopics extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 SecurePost({
                     url : `${apis.ADD_COURSE}`,
                     data : {
@@ -33,7 +32,6 @@ class NewTopics extends Component {
                     if(response.data.message ==="Success"){
                         if(this.props.user.userDetails.category === "Institution") {
                             const instituationId = this.props.userDetails.institution.id;
-                            console.log("courseId",response.data.courseId)
                             SecurePost({
                                 url : `${apis.ADD_COURSE_DETAILS}`,
                                 data : {

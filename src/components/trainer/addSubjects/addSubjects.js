@@ -21,9 +21,9 @@ class NewTopics extends Component {
                 SecurePost({
                     url : `${apis.ADD_COURSE}`,
                     data : {
-                        courseName : values.courseName,
-                        courseType:values.courseType,
-                        courseDescription:values.courseDescription,
+                        subject:values.subject,
+                        module:values.module,
+                        chapter:values.chapter,
                     }
                 }).then((response)=>{
                     if(response.data.message ==="Success"){
@@ -50,28 +50,28 @@ class NewTopics extends Component {
             <div className="register-subject-form" >
                 <div className="register-trainer-form-body">
                     <Form  onSubmit={this.handleSubmit}>
-                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
-                            { getFieldDecorator('courseName', {
-                                initialValue : this.props.admin.subjectDetails.courseName,
-                                rules: [{ required: true, message: 'Please input course name!', whitespace: true }],
+                        <Form.Item label="Subject Name" hasFeedback className="input-admin-trainer">
+                            { getFieldDecorator('subject', {
+                                initialValue : this.props.trainer.SubjectTableData.subject,
+                                rules: [{ required: true, message: 'Please input Subject name!', whitespace: true }],
                             })(<Input />)
                             }
                         </Form.Item>
-                        <Form.Item label="Course Type" hasFeedback className="input-admin-trainer">
-                            {getFieldDecorator('courseType', {
-                                initialValue : this.props.admin.subjectDetails.courseType,
-                                rules: [{ required: true, message: 'Please input Course Type!', whitespace: true }],
+                        <Form.Item label="Module" hasFeedback className="input-admin-trainer">
+                            {getFieldDecorator('module', {
+                                initialValue : this.props.trainer.SubjectTableData.module,
+                                rules: [{ required: true, message: 'Please input Module!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>
-                        <Form.Item label="Course Description" hasFeedback className="input-admin-trainer">
-                            {getFieldDecorator('courseDescription', {
-                                initialValue : this.props.admin.subjectDetails.courseDescription,
-                                rules: [{ required: true, message: 'Please input Course Description!', whitespace: true }],
+                        <Form.Item label="Chapter" hasFeedback className="input-admin-trainer">
+                            {getFieldDecorator('chapter', {
+                                initialValue : this.props.trainer.SubjectTableData.chapter,
+                                rules: [{ required: true, message: 'Please input Chapter!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit" block>
-                                {this.props.admin.Subjectmode}
+                                {this.props.trainer.Subjectmode}
                             </Button>
                         </Form.Item>
                     </Form>
@@ -82,7 +82,7 @@ class NewTopics extends Component {
 }
 
 const mapStateToProps = state => ({
-    admin : state.admin,
+    trainer:state.trainer,
     user:state.user,
     userDetails:state.user.userDetails,
 });

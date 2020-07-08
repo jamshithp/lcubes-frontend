@@ -30,7 +30,6 @@ class AllCourses extends Component {
   }
 
   openModal = (id,mode,IsCreate)=>{
-    console.log("IsCreate",IsCreate)
     IsCreate ? this.props.ChangeAdminCourseModalState(true,id,mode):this.props.ChangeCourseModalState(true);
     this.setState({IsCreate:IsCreate});
   }

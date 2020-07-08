@@ -24,6 +24,7 @@ const initialState = {
     SubjectTableData : [],
     SubjecteSearchText: '',
     SubjectmodalOpened : false,
+    Subjectmode : 'New Topic',
 }
 
 

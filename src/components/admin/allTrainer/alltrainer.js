@@ -33,7 +33,6 @@ class AllTrainer extends Component {
   }
 
   componentDidMount(){
-    console.log("componentDidMount tariner")
     this.props.ChangeTrainerTableData();
   }
 
