@@ -28,14 +28,19 @@ export const TRAINER_PERMISSIONS=[
         link : '/user/home'
     },
     {
+        display : 'All students',
+        icon : 'Team',
+        link : '/user/students'
+    },
+    {
         display : 'All Courses',
         icon : 'book',
         link : '/user/listCourses'
     },
     {
-        display : 'All students',
-        icon : 'Team',
-        link : '/user/students'
+        display : 'All Subjects',
+        icon : 'book',
+        link : '/user/listSubjects'
     },
     {
         display : 'All Questions',

@@ -132,14 +132,14 @@ export const ChangeTrainerTableData = ()=> dispatch =>{
     })
 }
 
-export const ChangeSubjectModalState = (d1,d2,d3)=> dispatch =>{
+export const ChangeAdminCourseModalState = (d1,d2,d3)=> dispatch =>{
     if(d3==='Save Changes'){
         SecureGet({
             url : `${apis.GET_SINGLE_SUBJECT_DETAILS}/${d2}`
         }).then((response)=>{
             if(response.data.success){
                 dispatch({
-                    type : 'CHANGE_SUBJECT_MODAL_STATE',
+                    type : 'CHANGE_ADMIN_COURSE_MODAL_STATE',
                     payload1 : true,
                     payload2 : d2,
                     payload3 : 'Save Changes',
@@ -155,7 +155,7 @@ export const ChangeSubjectModalState = (d1,d2,d3)=> dispatch =>{
     }
     else{
         dispatch({
-            type : 'CHANGE_SUBJECT_MODAL_STATE',
+            type : 'CHANGE_ADMIN_COURSE_MODAL_STATE',
             payload1 : d1,
             payload2 : d2,
             payload3 : d3,
@@ -182,10 +182,10 @@ export const ChangeSubjectSearchText = (d)=> dispatch =>{
     })
 }
 
-export const ChangeSubjectTableData = (d)=> dispatch =>{
+export const ChangeAdminCourseTableData = (d)=> dispatch =>{
     console.log('fetchng subjects');
     dispatch({
-       type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+       type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
        payload1 : true,
        payload2 :[]
     })
@@ -195,7 +195,7 @@ export const ChangeSubjectTableData = (d)=> dispatch =>{
         console.log(response);
         if(response.data.message = "Success"){
             dispatch({
-                type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+                type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
                 payload1 : false,
                 payload2 : response.data.data
             })
@@ -203,7 +203,7 @@ export const ChangeSubjectTableData = (d)=> dispatch =>{
         else{
             Alert('error','Error!',response.data.message);
             dispatch({
-                type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+                type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
                 payload1 : false,
                 payload2 : []
             })
@@ -211,7 +211,7 @@ export const ChangeSubjectTableData = (d)=> dispatch =>{
       }).catch((error)=>{
         Alert('error','Error!','Server Error');
         dispatch({
-            type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+            type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
             payload1 : false,
             payload2 : []
         })
