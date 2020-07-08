@@ -38,7 +38,6 @@ export const updateCurrentTestBasicDetails = (d)=> dispatch=>{
         }
     }).then((response)=>{
         if(response.data.success){
-            console.log(response.data.data);
             dispatch({
                 type : 'UPDATE_TEST_BASIC_DETAILS',
                 payload : response.data.data

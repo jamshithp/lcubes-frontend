@@ -36,9 +36,7 @@ class NewTrainer extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                
+            if (!err) {              
                     SecurePost({
                         url : `${apis.CREATE_TRAINER}`,
                         data : {
@@ -55,7 +53,6 @@ class NewTrainer extends Component {
                             this.props.ChangeTrainerTableData();
                         }
                         else{
-                            console.log(response.data);
                             this.props.ChangeTrainerModalState(false,null,'Register');
                             return Alert('warning','Warning!',response.data.message);
                         }
