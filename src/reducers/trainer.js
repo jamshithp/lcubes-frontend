@@ -20,6 +20,10 @@ const initialState = {
         testquestions :[]
     },
     CoursemodalOpened : false,
+    SubjectTableLoading : false,
+    SubjectTableData : [],
+    SubjecteSearchText: '',
+    SubjectmodalOpened : false,
 }
 
 
@@ -121,6 +125,17 @@ export default (state = initialState, action )=>{
             return {
                 ...state,
                 CoursemodalOpened : action.payload1,
+            }
+        case 'CHANGE_SUBJECT_MODAL_STATE':
+            return {
+                ...state,
+                SubjectmodalOpened : action.payload1,
+            }
+        case 'CHANGE_SUBJECT_TABLE_LOADING_STATUS':
+            return {
+                ...state,
+                SubjectTableLoading : action.payload1,
+                SubjectTableData : action.payload2
             }
         default:
             return state;

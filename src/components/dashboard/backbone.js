@@ -7,6 +7,7 @@ import AllCourses from '../admin/allCourses/allCourses.js';
 import AllQuestions from '../trainer/allquestions/allquestion';
 import AllTests from '../trainer/alltests/alltest';
 import AllStudents from '../trainer/allStudents/allStudents';
+import AllSubjects from '../trainer/allSubjects/allSubjects';
 import ConductTest from '../trainer/conducttest/conducttest';
 import NewTest from '../trainer/newtest/newtest';
 import auth from '../../services/AuthServices';
@@ -108,6 +109,9 @@ class Dashboard extends React.Component{
         }
         else if(this.props.match.params.options==='listCourses'){
             torender = <AllCourses/>
+        }
+        else if(this.props.match.params.options==='listSubjects'){
+            torender = <AllSubjects/>
         }
         else if(this.props.match.params.options==='listquestions'){
             torender = <AllQuestions/>

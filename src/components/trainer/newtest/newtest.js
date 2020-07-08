@@ -8,14 +8,14 @@ import BasicTestForm from './basicForm';
 import SelectQuestion from './selectQuestion';
 import FinalQuestionView from './questionview';
 import { 
-    ChangeSubjectTableData
+    ChangeAdminCourseTableData
   } from '../../../actions/adminAction';
 const { Step } = Steps;
 const { Title } = Typography;
 
 class  NewTest extends React.Component {
     componentDidMount(){
-        this.props.ChangeSubjectTableData();
+        this.props.ChangeAdminCourseTableData();
     }
     render(){
         var torender="";
@@ -56,5 +56,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps,{
     changeStep,
-    ChangeSubjectTableData
+    ChangeAdminCourseTableData,
 })(NewTest);

@@ -94,12 +94,54 @@ export const ChangeQuestionModalState = (d1)=> dispatch =>{
         })
     }
 
-    export const ChangeCourseModalState = (d1)=> dispatch =>{
+export const ChangeCourseModalState = (d1)=> dispatch =>{
+    dispatch({
+        type : 'CHANGE_COURSE_MODAL_STATE',
+        payload1 : d1,
+    })
+}
+
+export const ChangeSubjectModalState = (d1)=> dispatch =>{
+    dispatch({
+        type : 'CHANGE_SUBJECT_MODAL_STATE',
+        payload1 : d1,
+    })
+}
+
+export const ChangeSubjectTableData = (id)=> dispatch =>{
+    dispatch({
+        type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+        payload1 : true,
+        payload2 : []
+    })
+    Get({
+        url:  `${apis.GET_COURSE_BY_INSTITUTION}/${id}`
+    }).then((response)=>{
+        console.log("ChangeStudentsTableData",response)
+        if(response.data.message === "Success"){
+            dispatch({
+                type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+                payload1 : false,
+                payload2 : response.data.data
+            })
+        }
+        else{
+            Alert('error','Error!',response.data.message);
+            dispatch({
+                type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+                payload1 : false,
+                payload2 : []
+            })
+        }
+      }).catch((error)=>{
+        Alert('error','Error!','Server Error');
         dispatch({
-            type : 'CHANGE_COURSE_MODAL_STATE',
-            payload1 : d1,
+            type : 'CHANGE_SUBJECT_TABLE_LOADING_STATUS',
+            payload1 : false,
+            payload2 : []
         })
-    }
+    })
+}
     
 
 export const ChangeQuestionConfirmDirty = (d)=> dispatch =>{
