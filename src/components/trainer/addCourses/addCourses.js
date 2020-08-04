@@ -23,7 +23,7 @@ class NewCourse extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const courseList = [this.props.admin.courseTableData.find(course =>course.courseType === this.state.SelectedType).courseId];
+        const courseList = [this.props.trainer.AllCourse.find(course =>course.courseName === this.state.SelectedType).courseId];
         console.log("courseList",courseList)
         SecurePost({
             url : `${apis.ADD_COURSE_DETAILS}`,
@@ -49,7 +49,7 @@ class NewCourse extends Component {
 
     handleMenuClick =(e,type) => {
       if(type === 'SelectedCourse') {
-           const courseType =  this.props.admin.courseTableData.find(course =>course.courseName === e.key).courseType;
+           const courseType =  this.props.trainer.AllCourse.find(course =>course.mainCourse.name === e.key).courseName;
 
             this.setState({SelectedType:courseType});
         }
@@ -58,19 +58,19 @@ class NewCourse extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
-        const  { admin } = this.props;
-        const CourseNameSet = new Set();
-         admin.courseTableData.map(course => {
-            CourseNameSet.add(course.courseName);
+        const  { trainer } = this.props;
+        const MainCourseSet = new Set();
+        trainer.AllCourse.map(course => {
+            MainCourseSet.add(course.mainCourse.name);
          });
-         const CourseType = admin.courseTableData.filter(course =>course.courseName === this.state.SelectedCourse).map(course =>
-            course.courseType
+         const CourseType = trainer.AllCourse.filter(course =>course.mainCourse.name === this.state.SelectedCourse).map(course =>
+            course.courseName
         );
-        const CourseName = [...CourseNameSet];
-        console.log("CourseName",CourseName,"CourseType",CourseType)
+        const MainCourseName = [...MainCourseSet];
+        console.log("MainCourseSet",MainCourseSet,"CourseType",CourseType)
         const courseList = (
             <Menu>
-                {CourseName.map((course) => (
+                {MainCourseName.map((course) => (
                     <Menu.Item key={course} onClick={(e)=>this.handleMenuClick(e,'SelectedCourse')}>
                         {course}
                     </Menu.Item>
@@ -90,12 +90,12 @@ class NewCourse extends Component {
             <div className="register-subject-form" >
                 <div className="register-trainer-form-body">
                     <Form  onSubmit={this.handleSubmit}>
-                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
+                        <Form.Item label="Main Course Name" hasFeedback className="input-admin-trainer">
                         <Dropdown.Button  overlay={courseList} icon={<DownOutlined />}>
                         {this.state.SelectedCourse}
                         </Dropdown.Button>
                         </Form.Item>
-                        <Form.Item label="Course Type" hasFeedback className="input-admin-trainer">
+                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
                         <Dropdown.Button  overlay={CourseTypeList} icon={<DownOutlined />}>
                         {this.state.SelectedType}
                         </Dropdown.Button>
@@ -113,7 +113,7 @@ class NewCourse extends Component {
 }
 
 const mapStateToProps = state => ({
-    admin : state.admin,
+    trainer:state.trainer,
     instituationId:state.user.userDetails.institution.id,
 });
 

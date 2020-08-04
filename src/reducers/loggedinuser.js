@@ -10,7 +10,6 @@ const initialState = {
 }
 
 export default (state = initialState, action )=>{
-    console.log("category",action.payload && action.payload,action.type)
     switch(action.type){
         case 'CHANGE_ACTIVE_URL':
             return {

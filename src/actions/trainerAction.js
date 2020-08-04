@@ -39,6 +39,36 @@ export const ChangeStudentsTableData = (id)=> dispatch =>{
     })
 }
 
+export const getAllCourseData = (id)=> dispatch =>{
+
+    Get({
+        url:  `${apis.GET_ALL_COURSE}`
+    }).then((response)=>{
+        console.log("getAllCourseData",response)
+        if(response.data.message === "Success"){
+            dispatch({
+                type : 'GET_ALL_COURSE_DATA',
+                payload1 : response.data.data
+            })
+        }
+        else{
+            Alert('error','Error!',response.data.message);
+            dispatch({
+                type : 'CHANGE_COURSE_TABLE_LOADING_STATUS',
+                payload1 : false,
+                payload2 : []
+            })
+        }
+      }).catch((error)=>{
+        Alert('error','Error!','Server Error');
+        dispatch({
+            type : 'CHANGE_COURSE_TABLE_LOADING_STATUS',
+            payload1 : false,
+            payload2 : []
+        })
+    })
+}
+
 export const ChangeCourseTableData = (id)=> dispatch =>{
     dispatch({
         type : 'CHANGE_COURSE_TABLE_LOADING_STATUS',
@@ -48,7 +78,7 @@ export const ChangeCourseTableData = (id)=> dispatch =>{
     Get({
         url:  `${apis.GET_COURSE_BY_INSTITUTION}/${id}`
     }).then((response)=>{
-        console.log("ChangeStudentsTableData",response)
+        console.log("ChangeCourseTableData",response)
         if(response.data.message === "Success"){
             dispatch({
                 type : 'CHANGE_COURSE_TABLE_LOADING_STATUS',
@@ -102,11 +132,27 @@ export const ChangeCourseModalState = (d1)=> dispatch =>{
     })
 }
 
-export const ChangeSubjectModalState = (d1)=> dispatch =>{
-    dispatch({
-        type : 'CHANGE_SUBJECT_MODAL_STATE',
-        payload1 : d1,
-    })
+export const ChangeSubjectModalState = (d1,d2,d3,d4)=> dispatch =>{
+    if(d3==='Save Changes'){
+        dispatch({
+            type : 'CHANGE_SUBJECT_MODAL_STATE',
+            payload1 : true,
+            payload2 : d2,
+            payload3 : 'Save Changes',
+            payload4: d4
+        })
+    }
+    else{
+        dispatch({
+            type : 'CHANGE_SUBJECT_MODAL_STATE',
+            payload1 : d1,
+            payload2 : d2,
+            payload3 : d3,
+            payload4: {
+                topic : null
+            }
+        })
+    }
 }
 
 export const ChangeSubjectTableData = (id)=> dispatch =>{

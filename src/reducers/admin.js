@@ -13,11 +13,11 @@ const initialState = {
     courseTableData : [] ,
     courseModalOpened : false,
     courseConfirmDirty: false,
-    Subjectmode : 'New Topic',
+    coursemode : 'New Topic',
     SubjectId : null,
     courseSearchText : '',
     courseTableLoading : false,
-    subjectDetails :{}
+    courseDetails :{}
 }
 
 export default (state = initialState, action )=>{
@@ -60,8 +60,8 @@ export default (state = initialState, action )=>{
                 ...state,
                 courseModalOpened : action.payload1,
                 SubjectId : action.payload2,
-                Subjectmode : action.payload3,
-                subjectDetails : action.payload4
+                coursemode : action.payload3,
+                courseDetails : action.payload4
             }
         case 'CHANGE_SUBJECT_FORM_CONFIRMDIRTY':
             return {

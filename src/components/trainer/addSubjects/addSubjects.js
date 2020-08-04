@@ -18,8 +18,10 @@ class NewTopics extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                const CreateSubject = this.props.trainer.Subjectmode ==='New Topic' ,
+                    url = CreateSubject? apis.ADD_CATEGORY : apis.UPDATE_CATEGORY;
                 SecurePost({
-                    url : `${apis.ADD_COURSE}`,
+                    url : `http://54.160.111.123:9091${url}`,
                     data : {
                         subject:values.subject,
                         module:values.module,
@@ -45,27 +47,49 @@ class NewTopics extends Component {
 
     render() {
         const { getFieldDecorator } = this.props.form;
+        const { Option } = Select;
+        const CourseNameSet = new Set();
+        this.props.trainer.AllCourse.map(course => {
+        CourseNameSet.add(course.mainCourse.name);
+        });
 
         return (
             <div className="register-subject-form" >
                 <div className="register-trainer-form-body">
                     <Form  onSubmit={this.handleSubmit}>
+                        <Form.Item label="Main Course Name" hasFeedback className="input-admin-trainer">
+                            { getFieldDecorator('mainCourseName', {
+                                initialValue : this.props.trainer.SubjectDetails.mainCourseId,
+                                rules: [{ required: true, message: 'Please select a  main course!', whitespace: true }],
+                            })(
+                                <Select
+                                    showSearch
+                                    style={{ width:'100%'}}
+                                    placeholder="Select a Main Course"
+                                    optionFilterProp="s"
+                                >
+                                    {
+                                        this.props.trainer.AllCourse.map((d,i)=><Option key={d.mainCourse.id} s={d} value={d.mainCourse.id}>{d.mainCourse.id}</Option>)
+                                    }
+                                </Select>
+                            )}
+                        </Form.Item>
                         <Form.Item label="Subject Name" hasFeedback className="input-admin-trainer">
                             { getFieldDecorator('subject', {
-                                initialValue : this.props.trainer.SubjectTableData.subject,
+                                initialValue : this.props.trainer.SubjectDetails.subject,
                                 rules: [{ required: true, message: 'Please input Subject name!', whitespace: true }],
                             })(<Input />)
                             }
                         </Form.Item>
                         <Form.Item label="Module" hasFeedback className="input-admin-trainer">
                             {getFieldDecorator('module', {
-                                initialValue : this.props.trainer.SubjectTableData.module,
+                                initialValue : this.props.trainer.SubjectDetails.module,
                                 rules: [{ required: true, message: 'Please input Module!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>
                         <Form.Item label="Chapter" hasFeedback className="input-admin-trainer">
                             {getFieldDecorator('chapter', {
-                                initialValue : this.props.trainer.SubjectTableData.chapter,
+                                initialValue : this.props.trainer.SubjectDetails.chapter,
                                 rules: [{ required: true, message: 'Please input Chapter!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>

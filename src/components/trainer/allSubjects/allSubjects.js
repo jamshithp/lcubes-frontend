@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import {
   ChangeCourseSearchText,
   ChangeSubjectTableData,
-  ChangeSubjectModalState
+  ChangeSubjectModalState,
+  getAllCourseData,
+
 } from '../../../actions/trainerAction';
 import './allSubjects.css'
 import NewSubjectForm from '../../trainer/addSubjects/addSubjects';
@@ -23,17 +25,18 @@ class AllSubjects extends Component {
     }
   }
 
-  openModal = ()=>{
-     this.props.ChangeSubjectModalState(true);
+  openModal = (id,mode,row)=>{
+     this.props.ChangeSubjectModalState(true,id,mode,row);
   }
   
   closeModal = ()=>{
-    this.props.ChangeSubjectModalState(false);
+    this.props.ChangeSubjectModalState(false,null,'New Subject');
   }
 
 
   componentDidMount(){
     this.props.ChangeSubjectTableData();
+    this.props.getAllCourseData();
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -131,16 +134,16 @@ class AllSubjects extends Component {
           title: 'Action',
           key: '_id',
           dataIndex: '_id',
-          render: (key) => (
+          render: (key,row) => (
             <span>
-              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes')}/>
+              <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={()=>this.openModal(key,'Save Changes',row)}/>
             </span>
           ),
         },
       ];
         return (
           <div className="admin-table-container">
-            <Button type="primary" icon={<PlusCircleOutlined/>} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal()}>
+            <Button type="primary" icon={<PlusCircleOutlined/>} style={{marginBottom:'10px',marginRight:'10px'}} onClick={()=>this.openModal(null,'New Subject',true)}>
               Add Subject
             </Button>
             <div className="register-trainer-form-header">
@@ -151,7 +154,7 @@ class AllSubjects extends Component {
               columns={columns}
               dataSource={this.props.trainer.SubjectTableData}
               size="medium"
-              pagination={{ pageSize: 5 }}
+              pagination={{ pageSize: 10 }}
               loading={this.props.trainer.SubjectTableLoading}
               rowKey="_id"
             />;
@@ -162,11 +165,9 @@ class AllSubjects extends Component {
               onCancel={()=>this.closeModal()}
               style={{top :'20px',padding:'0px',backgroundColor:'rgb(155,175,190)'}}
               destroyOnClose={true}
-              footer={[
-                
-              ]}
+              footer={[]}
             >
-             { <NewSubjectForm />}
+             <NewSubjectForm />
             </Modal>
           </div>
         );
@@ -182,6 +183,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps,{
     ChangeSubjectModalState,
     ChangeSubjectTableData,
-
-
+    getAllCourseData,
 })(AllSubjects);
