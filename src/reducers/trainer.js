@@ -7,6 +7,7 @@ const initialState = {
     StudentsTableLoading : false,
     StudentsTableData : [],
     StudentSearchText: '',
+    AllCourse:[],
     CourseTableLoading : false,
     CourseTableData : [],
     CourseSearchText: '',
@@ -24,7 +25,8 @@ const initialState = {
     SubjectTableData : [],
     SubjecteSearchText: '',
     SubjectmodalOpened : false,
-    Subjectmode : 'New Topic',
+    Subjectmode : 'New Subject',
+    SubjectDetails:[],
 }
 
 
@@ -56,6 +58,11 @@ export default (state = initialState, action )=>{
                 ...state,
                 CourseTableLoading : action.payload1,
                 CourseTableData : action.payload2
+            }
+        case 'GET_ALL_COURSE_DATA':
+            return {
+                ...state,
+                AllCourse : action.payload1
             }
         case 'CHANGE_STUDENT_SEARCH_TEXT':
             return {
@@ -131,6 +138,9 @@ export default (state = initialState, action )=>{
             return {
                 ...state,
                 SubjectmodalOpened : action.payload1,
+                SubjectId : action.payload2,
+                Subjectmode : action.payload3,
+                SubjectDetails : action.payload4
             }
         case 'CHANGE_SUBJECT_TABLE_LOADING_STATUS':
             return {

@@ -12,7 +12,7 @@ import {
     ChangeAdminCourseTableData,
     ChangeAdminCourseModalState,
 } from '../../../actions/adminAction';
-import { ChangeCourseTableData } from '../../../actions/trainerAction';
+import { ChangeCourseTableData,ChangeCourseModalState} from '../../../actions/trainerAction';
 
 
 class NewTopics extends Component {
@@ -21,17 +21,48 @@ class NewTopics extends Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                SecurePost({
-                    url : `${apis.ADD_COURSE}`,
-                    data : {
-                        courseName : values.courseName,
-                        courseType:values.courseType,
-                        courseDescription:values.courseDescription,
-                    }
-                }).then((response)=>{
-                    if(response.data.message ==="Success"){
-                        if(this.props.user.userDetails.category === "Institution") {
-                            const instituationId = this.props.userDetails.institution.id;
+                console.log("category",this.props.userDetails.category)
+                if(this.props.userDetails.category === "Admin") {
+                    const CreateCourse = this.props.admin.coursemode ==='New Topic' ,
+                    url = CreateCourse? apis.ADD_MAIN_COURSE : apis.UPDATE_MAIN_COURSE;
+
+                    SecurePost({
+                        url : `http://54.160.111.123:9091${url}`,
+                        data : {
+                            name : values.courseName,
+                            description:values.courseDescription,
+                            id:this.props.admin.courseDetails.id,
+                        }
+                    }).then((response)=>{
+                        if(response.data.message ==="Success"){
+                        this.props.ChangeAdminCourseModalState(false,null,'New Topic');
+                        Alert('success','Success',response.data.message);
+                        this.props.ChangeAdminCourseTableData();
+                        }
+                        else{
+                            this.props.ChangeAdminCourseModalState(false,null,'New Topic');
+                            return Alert('warning','Warning!',response.data.message);
+                        }
+                    }).catch((error)=>{
+                        this.props.ChangeAdminCourseModalState(false,null,'New Topic');
+                        return Alert('error','Error!','Server Error');
+                    });
+                }
+                else {
+                    const instituationId = this.props.userDetails.institution.id,
+                    mainCourseId = this.props.trainer.AllCourse.find(course => course.mainCourse.name === values.courseName).courseId;
+
+                    SecurePost({
+                        url : `${apis.ADD_COURSE}`,
+                        data : {
+                            courseName:values.courseType,
+                            courseDescription:values.courseDescription,
+                            mainCourse:{
+                                id:mainCourseId,
+                            },
+                        }
+                    }).then((response)=>{
+                        if(response.data.message ==="Success"){
                             SecurePost({
                                 url : `${apis.ADD_COURSE_DETAILS}`,
                                 data : {
@@ -42,31 +73,26 @@ class NewTopics extends Component {
                                 if(response.data.message ==="Success"){
                                     Alert('success','Success',response.data.message);
                                     this.props.ChangeCourseTableData(instituationId);
-                                    this.props.ChangeAdminCourseModalState(false);
+                                    this.props.ChangeCourseModalState(false);
                                 }
                                 else{
-                                    this.props.ChangeAdminCourseModalState(false);
+                                    this.props.ChangeCourseModalState(false);
                                     return Alert('warning','Warning!',response.data.message);
                                 }
                             }).catch((error)=>{
-                                this.props.ChangeAdminCourseModalState(false);
+                                this.props.ChangeCourseModalState(false);
                                 return Alert('error','Error!','Server Error');
                             })
                         }
-                        else {
-                            this.props.ChangeAdminCourseModalState(false,null,'New Topic');
-                            Alert('success','Success',response.data.message);
-                            this.props.ChangeAdminCourseTableData();
+                        else{
+                            this.props.ChangeCourseModalState(false,null,'New Topic');
+                            return Alert('warning','Warning!',response.data.message);
                         }
-                    }
-                    else{
-                        this.props.ChangeAdminCourseModalState(false,null,'New Topic');
-                        return Alert('warning','Warning!',response.data.message);
-                    }
-                }).catch((error)=>{
-                    this.props.ChangeAdminCourseModalState(false,null,'New Topic');
-                    return Alert('error','Error!','Server Error');
-                })
+                    }).catch((error)=>{
+                        this.props.ChangeCourseModalState(false,null,'New Topic');
+                        return Alert('error','Error!','Server Error');
+                    });
+                }
             }
         });
     };
@@ -80,17 +106,17 @@ class NewTopics extends Component {
         const { Option } = Select;
         const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
         const CourseNameSet = new Set();
-        this.props.admin.courseTableData.map(course => {
-        CourseNameSet.add(course.courseName);
+        this.props.trainer.AllCourse.map(course => {
+        CourseNameSet.add(course.mainCourse.name);
         });
 
         return (
             <div className="register-subject-form" >
                 <div className="register-trainer-form-body">
                     <Form  onSubmit={this.handleSubmit}>
-                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
+                        <Form.Item label="Main Course Name" hasFeedback className="input-admin-trainer">
                             { getFieldDecorator('courseName', {
-                                initialValue : this.props.admin.subjectDetails.courseName,
+                                initialValue : this.props.admin.courseDetails.name,
                                 rules: [{ required: true, message: 'Please input course name!', whitespace: true }],
                             })(IsAdmin ? <Input /> :
                                 <Select
@@ -106,21 +132,21 @@ class NewTopics extends Component {
                                 )
                             }
                         </Form.Item>
-                        <Form.Item label="Course Type" hasFeedback className="input-admin-trainer">
+                        {!IsAdmin && <Form.Item label="Course Type" hasFeedback className="input-admin-trainer">
                             {getFieldDecorator('courseType', {
-                                initialValue : this.props.admin.subjectDetails.courseType,
+                                initialValue : this.props.admin.courseDetails.courseType,
                                 rules: [{ required: true, message: 'Please input Course Type!', whitespace: true }],
                             })(<Input />)}
-                        </Form.Item>
+                        </Form.Item>}
                         <Form.Item label="Course Description" hasFeedback className="input-admin-trainer">
                             {getFieldDecorator('courseDescription', {
-                                initialValue : this.props.admin.subjectDetails.courseDescription,
+                                initialValue : this.props.admin.courseDetails.description,
                                 rules: [{ required: true, message: 'Please input Course Description!', whitespace: true }],
                             })(<Input />)}
                         </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit" block>
-                                {this.props.admin.Subjectmode}
+                                {this.props.admin.coursemode}
                             </Button>
                         </Form.Item>
                     </Form>
@@ -132,6 +158,7 @@ class NewTopics extends Component {
 
 const mapStateToProps = state => ({
     admin : state.admin,
+    trainer:state.trainer,
     user:state.user,
     userDetails:state.user.userDetails,
 });
@@ -145,5 +172,6 @@ export default connect(mapStateToProps,{
     ChangeAdminCourseTableData,
     ChangeAdminCourseModalState,
     ChangeCourseTableData,
+    ChangeCourseModalState,
 })(NewSubjectForm);
 

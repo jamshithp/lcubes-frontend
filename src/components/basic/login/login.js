@@ -38,7 +38,7 @@ class Login extends React.Component{
         };
 
       handleCancel = e => {
-        console.log(e);
+        //console.log(e);
         this.setState({
           visible: false,
         });
@@ -52,12 +52,13 @@ class Login extends React.Component{
                     email:values.email,
                     password:values.password
                 };
-                console.log('Received values of form: ', values);
+                //console.log('Received values of form: ', values);
                 SecurePost({
                     url : `${apis.LOGIN}`,
                     data:data
                 }).then((response)=>{
-                    console.log(response);
+                    //console.log(response);
+                    localStorage.setItem('loggedIn',true)
                     if(response.data.message === "Success"){
                         this.props.login(response.data.data)
                         this.setState({

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { pathOr } from 'ramda';
 import AllTrainer from '../admin/allTrainer/alltrainer';
 import AllCourses from '../admin/allCourses/allCourses.js';
+import AllMainCourses from '../admin/allMainCourses/allMainCourses';
 import AllQuestions from '../trainer/allquestions/allquestion';
 import AllTests from '../trainer/alltests/alltest';
 import AllStudents from '../trainer/allStudents/allStudents';
@@ -108,6 +109,9 @@ class Dashboard extends React.Component{
         }
         else if(this.props.match.params.options==='listCourses'){
             torender = <AllCourses/>
+        }
+        else if(this.props.match.params.options==='listMainCourses'){
+            torender = <AllMainCourses/>
         }
         else if(this.props.match.params.options==='listSubjects'){
             torender = <AllSubjects/>

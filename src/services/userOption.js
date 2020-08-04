@@ -15,9 +15,9 @@ export const ADMIN_PERMISSIONS=[
     //     link : '/user/listtrainers'
     // },
     {
-        display : 'All Courses',
+        display : 'All Main Courses',
         icon : 'book',
-        link : '/user/listCourses'
+        link : '/user/listMainCourses'
     }
 ]
 

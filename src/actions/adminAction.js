@@ -130,25 +130,14 @@ export const ChangeTrainerTableData = ()=> dispatch =>{
     })
 }
 
-export const ChangeAdminCourseModalState = (d1,d2,d3)=> dispatch =>{
+export const ChangeAdminCourseModalState = (d1,d2,d3,d4)=> dispatch =>{
     if(d3==='Save Changes'){
-        SecureGet({
-            url : `${apis.GET_SINGLE_SUBJECT_DETAILS}/${d2}`
-        }).then((response)=>{
-            if(response.data.success){
-                dispatch({
-                    type : 'CHANGE_ADMIN_COURSE_MODAL_STATE',
-                    payload1 : true,
-                    payload2 : d2,
-                    payload3 : 'Save Changes',
-                    payload4: response.data.data[0]
-                })
-            }
-            else{
-                return Alert('warning','Warning!',response.data.message);
-            }
-        }).catch((error)=>{
-            return Alert('error','Error!','Server Error');
+        dispatch({
+            type : 'CHANGE_ADMIN_COURSE_MODAL_STATE',
+            payload1 : true,
+            payload2 : d2,
+            payload3 : 'Save Changes',
+            payload4: d4
         })
     }
     else{
@@ -185,9 +174,10 @@ export const ChangeAdminCourseTableData = (d)=> dispatch =>{
        type : 'CHANGE_ADMIN_COURSE_TABLE_LOADING_STATUS',
        payload1 : true,
        payload2 :[]
-    })
+    });
+    const url = `http://54.160.111.123:9091${apis.GET_ALL_MAIN_COURSE}`;
     SecureGet({
-        url:  `${apis.GET_ALL_COURSE}`
+        url:  url
     }).then((response)=>{
         if(response.data.message = "Success"){
             dispatch({
