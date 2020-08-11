@@ -10,6 +10,9 @@ import {
   getAllCourseData,
 
 } from '../../../actions/trainerAction';
+import { 
+  ChangeAdminCourseTableData,
+} from '../../../actions/adminAction';
 import './allSubjects.css'
 import NewSubjectForm from '../../trainer/addSubjects/addSubjects';
 
@@ -37,6 +40,8 @@ class AllSubjects extends Component {
   componentDidMount(){
     this.props.ChangeSubjectTableData();
     this.props.getAllCourseData();
+     this.props.ChangeAdminCourseTableData();
+
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -184,4 +189,5 @@ export default connect(mapStateToProps,{
     ChangeSubjectModalState,
     ChangeSubjectTableData,
     getAllCourseData,
+    ChangeAdminCourseTableData,
 })(AllSubjects);

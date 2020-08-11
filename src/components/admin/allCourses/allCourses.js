@@ -5,6 +5,7 @@ import Highlighter from 'react-highlight-words';
 import { connect } from 'react-redux';
 import { 
     ChangeSubjectSearchText,
+    ChangeAdminCourseTableData,
 } from '../../../actions/adminAction';
 import {
   ChangeCourseSearchText,
@@ -43,6 +44,7 @@ class AllCourses extends Component {
     user.userDetails.category === "Institution" &&
     this.props.ChangeCourseTableData(user.userDetails.institution.id);
     this.props.getAllCourseData();
+    this.props.ChangeAdminCourseTableData();
   }
 
     getColumnSearchProps = dataIndex => ({
@@ -133,7 +135,7 @@ class AllCourses extends Component {
           //...this.getColumnSearchProps('mainCourse'),
         },
         {
-          title: 'Course Name',
+          title: 'Sub Course Name',
           dataIndex: 'courseName',
           key: 'courseName',
           width: '25%',
@@ -207,5 +209,6 @@ export default connect(mapStateToProps,{
     ChangeCourseSearchText,
     ChangeCourseTableData,
     ChangeCourseModalState,
+    ChangeAdminCourseTableData,
 
 })(AllCourses);

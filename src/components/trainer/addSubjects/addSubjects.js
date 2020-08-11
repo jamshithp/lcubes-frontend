@@ -15,17 +15,22 @@ class NewTopics extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        
         this.props.form.validateFieldsAndScroll((err, values) => {
+            console.log("values",values);
             if (!err) {
                 console.log('Received values of form: ', values);
                 const CreateSubject = this.props.trainer.Subjectmode ==='New Topic' ,
-                    url = CreateSubject? apis.ADD_CATEGORY : apis.UPDATE_CATEGORY;
+                    url = CreateSubject? apis.ADD_CATEGORY : apis.UPDATE_CATEGORY,
+                    mainCourseId =  this.props.admin.courseTableData.find(d=>d.name = values.mainCourseName).id;
                 SecurePost({
                     url : `http://54.160.111.123:9091${url}`,
                     data : {
                         subject:values.subject,
                         module:values.module,
                         chapter:values.chapter,
+                        mainCourseId:mainCourseId,
+                        id:this.props.trainer.SubjectDetails.id,
                     }
                 }).then((response)=>{
                     if(response.data.message ==="Success"){
@@ -48,10 +53,8 @@ class NewTopics extends Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         const { Option } = Select;
-        const CourseNameSet = new Set();
-        this.props.trainer.AllCourse.map(course => {
-        CourseNameSet.add(course.mainCourse.name);
-        });
+        const mainCourse = this.props.admin.courseTableData.find(d=>d.id = this.props.trainer.SubjectDetails.mainCourseId),
+        mainCourseName = mainCourse ? mainCourse.name : "";
 
         return (
             <div className="register-subject-form" >
@@ -59,7 +62,7 @@ class NewTopics extends Component {
                     <Form  onSubmit={this.handleSubmit}>
                         <Form.Item label="Main Course Name" hasFeedback className="input-admin-trainer">
                             { getFieldDecorator('mainCourseName', {
-                                initialValue : this.props.trainer.SubjectDetails.mainCourseId,
+                                initialValue :   mainCourseName,
                                 rules: [{ required: true, message: 'Please select a  main course!', whitespace: true }],
                             })(
                                 <Select
@@ -69,7 +72,7 @@ class NewTopics extends Component {
                                     optionFilterProp="s"
                                 >
                                     {
-                                        this.props.trainer.AllCourse.map((d,i)=><Option key={d.mainCourse.id} s={d} value={d.mainCourse.id}>{d.mainCourse.id}</Option>)
+                                        this.props.admin.courseTableData.map((d,i)=><Option key={d._id} s={d} value={d.name}>{d.name}</Option>)
                                     }
                                 </Select>
                             )}
@@ -108,6 +111,7 @@ class NewTopics extends Component {
 const mapStateToProps = state => ({
     trainer:state.trainer,
     user:state.user,
+    admin:state.admin,
     userDetails:state.user.userDetails,
 });
 

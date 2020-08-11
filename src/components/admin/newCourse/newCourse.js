@@ -50,7 +50,7 @@ class NewTopics extends Component {
                 }
                 else {
                     const instituationId = this.props.userDetails.institution.id,
-                    mainCourseId = this.props.trainer.AllCourse.find(course => course.mainCourse.name === values.courseName).courseId;
+                    mainCourseId = this.props.admin.courseTableData.find(course => course.name === values.courseName).id;
 
                     SecurePost({
                         url : `${apis.ADD_COURSE}`,
@@ -106,8 +106,8 @@ class NewTopics extends Component {
         const { Option } = Select;
         const IsAdmin =  this.props.user.userDetails.category === "Institution" ? false : true;
         const CourseNameSet = new Set();
-        this.props.trainer.AllCourse.map(course => {
-        CourseNameSet.add(course.mainCourse.name);
+        this.props.admin.courseTableData.map(course => {
+        CourseNameSet.add(course.name);
         });
 
         return (

@@ -95,7 +95,7 @@ class NewCourse extends Component {
                         {this.state.SelectedCourse}
                         </Dropdown.Button>
                         </Form.Item>
-                        <Form.Item label="Course Name" hasFeedback className="input-admin-trainer">
+                        <Form.Item label="Sub Course Name" hasFeedback className="input-admin-trainer">
                         <Dropdown.Button  overlay={CourseTypeList} icon={<DownOutlined />}>
                         {this.state.SelectedType}
                         </Dropdown.Button>
