@@ -212,12 +212,9 @@ export const ChangeQuestionTableData = (d)=> dispatch =>{
        payload1 : true,
        payload2:[]
     });
-    SecurePost({
-        url : `${apis.GET_ALL_QUESTIONS}`,
-        data:{
-            subject : d
-        }
-    }).then((response)=>{
+    const url = `http://54.160.111.123:9091${apis.GET_ALL_QUESTIONS}`;
+    axios.request({ method: 'get', url })
+    .then((response)=>{
         console.log(response);
         if(response.data.success){
             dispatch({

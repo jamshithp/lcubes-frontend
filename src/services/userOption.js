@@ -21,6 +21,14 @@ export const ADMIN_PERMISSIONS=[
     }
 ]
 
+export const STUDENT_PERMISSIONS=[
+    {
+        display : 'Welcome',
+        icon : 'home',
+        link : '/user/home'
+    },
+]
+
 export const TRAINER_PERMISSIONS=[
     {
         display : 'Welcome',
