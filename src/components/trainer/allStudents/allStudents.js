@@ -34,6 +34,7 @@ class AllStudents extends Component {
       console.log("componentDidMount");
       const { user } = this.props;
       const instId =  pathOr("", [ 'userDetails','institution','id'], user);
+      console.log("instId",instId)
     this.props.ChangeStudentsTableData(instId);
   }
 

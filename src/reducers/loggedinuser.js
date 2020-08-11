@@ -1,4 +1,4 @@
-import { ADMIN_PERMISSIONS, TRAINER_PERMISSIONS} from '../services/userOption';
+import { ADMIN_PERMISSIONS, TRAINER_PERMISSIONS,STUDENT_PERMISSIONS} from '../services/userOption';
 
 const initialState = {
     isLoggedIn : false,
@@ -32,7 +32,7 @@ export default (state = initialState, action )=>{
                     userOptions : ADMIN_PERMISSIONS
                 }
             }
-            else{
+            else if(action.payload.category == 'Institution'){
                 return {
                     ...state,
                     isLoggedIn : true,
@@ -40,6 +40,16 @@ export default (state = initialState, action )=>{
                         ...action.payload
                     },
                     userOptions : TRAINER_PERMISSIONS
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    isLoggedIn : true,
+                    userDetails:{
+                        ...action.payload
+                    },
+                    userOptions : STUDENT_PERMISSIONS
                 }
             }
         case 'LOGOUT':

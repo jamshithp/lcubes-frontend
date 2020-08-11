@@ -218,7 +218,7 @@ class AllQuestions extends Component {
                     allowClear={true}
                     optionFilterProp="s"
                   >
-                    {this.props.admin.subjectTableData.map(item => (
+                    {this.props.trainer.subjectTableData.map(item => (
                       <Select.Option key={item._id} value={item._id} s={item.topic}>
                         {item.topic}
                       </Select.Option>
